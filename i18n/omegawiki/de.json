@@ -18,6 +18,7 @@
 	"apihelp-ow_add_annotation-param-option_lang": "Zu verarbeitende Option.",
 	"apihelp-ow_add_annotation-param-relation": "Zu verarbeitende Beziehung.",
 	"apihelp-ow_add_annotation-param-relation_lang": "Zu verarbeitende Beziehung.",
+	"apihelp-ow_add_annotation-param-wikipage": "Die zu verarbeitende Wikiseite (TSV-Format, Wikiseite wird verwendet).",
 	"apihelp-ow_add_annotation-param-test": "Testmodus. Es werden keine Änderungen durchgeführt.",
 	"apihelp-ow_add_definition-summary": "Fügt dem Omegawiki Definitionen hinzu.",
 	"apihelp-ow_add_definition-param-d": "Die hinzuzufügende Definition.",
