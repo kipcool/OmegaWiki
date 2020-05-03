@@ -3,6 +3,7 @@
 		"authors": [
 			"Bhawani Gautam",
 			"RajeshPandey",
+			"पर्वत सुबेदी",
 			"राम प्रसाद जोशी",
 			"सरोज कुमार ढकाल"
 		]
@@ -22,5 +23,7 @@
 	"datasearch_language": "भाषा:",
 	"datasearch_found_word": "शब्द पाइयो",
 	"datasearch_meaning": "अर्थ",
-	"ow_transaction_user": "प्रयोगकर्ता नाम:"
+	"ow_exporttsv_languages": "भाषाहरू",
+	"ow_transaction_user": "प्रयोगकर्ता नाम:",
+	"prefs-ow-lang": "भाषाहरू"
 }

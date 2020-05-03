@@ -6,7 +6,6 @@
 /**
  * Simple formatting
  */
-
 class WldFormatCSV {
 	function formatCSVcolumn( $column ) {
 		if ( is_numeric( $column ) ) {

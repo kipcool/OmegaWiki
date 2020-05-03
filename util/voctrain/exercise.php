@@ -190,10 +190,11 @@ class Exercise implements Iterator {
 	 * Calling this routine takes care of both of these tasks.
 	 * If a question  element is empty, we fill it, and return the filled element.
 	 * If the question element is already filled, we can return it right away.
-	 * @param $dmid 	the dmid to fetch
-	 * @param $targetDOM 	the DOM to work with
-	 * @param $_depth  	traps recursion, $_depth may not be larger than 1.
-	 * @param $fetch
+	 * @param int $dmid the dmid to fetch
+	 * @param DOMDocument $targetDOM the DOM to work with
+	 * @param int $_depth traps recursion, $_depth may not be larger than 1.
+	 * @param bool $fetch
+	 * @return DOMNode
 	 */
 	private function _getQuestionNode( $dmid, $targetDOM, $_depth = 0, $fetch = true ) {
 		if ( !is_int( $dmid ) ) {
@@ -231,8 +232,9 @@ class Exercise implements Iterator {
 	/**
 	 * Perform actual fetch for getQuestionMode, and cahce it in $this->full_set as well.
 	 * recursively calls back _getQuestionNode ONCE to parse out node
-	 * @param dmid	defined meaning id to fetch
-	 * @param the old empty node to replace
+	 * @param int $dmid defined meaning id to fetch
+	 * @param DOMNode $oldNode the old empty node to replace
+	 * @return DOMNode
 	 */
 	private function _fetchQuestionNode( $dmid, $oldNode ) {
 		$xmlString = $this->fetcher->getDefinedMeaningXML_asString( $dmid, $this->getLanguages() );
@@ -255,7 +257,12 @@ class Exercise implements Iterator {
 		return $newNode;
 	}
 
-	/** On the basis of the subset array provided, create new exercise object */
+	/**
+	 * On the basis of the subset array provided, create new exercise object
+	 *
+	 * @param int[] $subset
+	 * @return Exercise
+	 */
 	public function getSubExercize( $subset ) {
 		$dom = new DOMDocument();
 		$collection = $dom->createElement( "collection" );
@@ -297,6 +304,9 @@ class Exercise implements Iterator {
 
 	/** Make a basic (unweighted) subexercise,
 	 *  with up to $size questions.
+	 *
+	 * @param int $size
+	 * @return Exercise
 	 */
 	public function randSubExercise( $size ) {
 		$set = $this->getSet();
@@ -314,6 +324,10 @@ class Exercise implements Iterator {
 	 * or throws MissingWordsException if words are missing.
 	 * (I wish I had compile-time checks like in java )
 	 * (you can suppress question consistency checking by setting $selfCheck to false)
+	 *
+	 * @param int $dmid
+	 * @param bool $selfCheck
+	 * @return Question
 	 */
 	public function getQuestion( $dmid, $selfCheck = true ) {
 		if ( !is_int( $dmid ) ) {

@@ -19,15 +19,15 @@ class CreateDocumentation extends Maintenance {
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this->mDescription = "Generates the WikiLexicalData Document\n"
-			. 'Example usage: php createDocumentation.php --config=docTemplate.cfg ';
+		$this->addDescription( "Generates the WikiLexicalData Document\n"
+			. 'Example usage: php createDocumentation.php --config=docTemplate.cfg ' );
 		$this->addOption( 'config', 'A doxygen config file used to creating the documentation. e.g. --config=docTemplate.cfg' );
 	}
 
 	/** \brief public function execute
 	 */
 	public function execute() {
-		global $wdCurrentContext, $wgDBprefix, $wgWldDownloadScriptPath;
+		global $wgWldDownloadScriptPath;
 
 		// checking that the needed parameters are given
 		// else use the default config file
@@ -58,8 +58,8 @@ class CreateDocumentation extends Maintenance {
 
 	/** \brief Read, interpret and create the configuration to use
 	 *
-	 * @param $filename str The template config file.
-	 * @param $configFinal str The config file to produce.
+	 * @param string $filename The template config file.
+	 * @param string $configFinal The config file to produce.
 	 */
 	protected function readTemplateConfigFile( $filename, $configFinal ) {
 		global $wgWldDownloadScriptPath;

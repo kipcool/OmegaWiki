@@ -12,10 +12,10 @@ class Attribute {
 	public $type = "";
 
 	/**
-	 * @param id   (String) or null if type is Structure
-	 * @param name (String)
-	 * @param type (String or Structure)
-	 *  If String, can be "language", "spelling", "boolean",
+	 * @param string|null $id (string) or null if type is Structure
+	 * @param string $name
+	 * @param string|Structure $type
+	 *  If string, can be "language", "spelling", "boolean",
 	 *  "defined-meaning", "defining-expression", "relation-type", "attribute",
 	 *  "collection", "short-text", "text"
 	 *
@@ -37,10 +37,10 @@ class Attribute {
 
 		// Since the attribute is a structure and unnamed, we use
 		// the default label associated with it.
-		if ( is_null( $this->id ) && ( $this->type instanceof Structure ) ) {
+		if ( $this->id === null && ( $this->type instanceof Structure ) ) {
 			$this->id = $this->type->getStructureType();
 		// Override structure label with a more specific one
-		} elseif ( !is_null( $this->id ) && ( $this->type instanceof Structure ) ) {
+		} elseif ( $this->id !== null && ( $this->type instanceof Structure ) ) {
 			$this->type->setStructureType( $this->id );
 		}
 	}
@@ -80,13 +80,13 @@ class Structure {
 	/**
 	 * Construct named Structure which contains Attribute objects
 	 *
-	 * @param $type (String)  Identifying string that describes the structure.
+	 * @param string|Attribute[]|Attribute $argumentList
+	 *  Can be an identifying string that describes the structure.
 	 *                        Optional; if not specified, will be considered
 	 *                        'anonymous-structure' unless there is only a
 	 *                        a single Attribute object, in which case the structure
 	 *                        will inherit its ID. Do not pass null.
-	 * @param $structure (Array or Parameter list) One or more Attribute objects.
-	 *
+	 *  Can be an array or parameter list of one or more Attribute objects.
 	 */
 	public function __construct( $argumentList ) {
 		# We're trying to be clever.
@@ -169,9 +169,9 @@ class Attributes {
 	}
 
 	/**
-	 * @param objectId req'd int the object id
-	 * @param option   opt'l arr optional array
-	 * @param dc       opt'l str the dataset to use
+	 * @param int $objectId req'd the object id
+	 * @param array $options opt'l
+	 * @param string|null $dc opt'l the dataset to use
 	 *
 	 * @return array(
 	 * 	'text' => $string,
@@ -183,7 +183,7 @@ class Attributes {
 	 * Note: $options can be used to introduce new variables
 	 */
 	public static function getTextAttributes( $objectId, $options = [], $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -240,9 +240,9 @@ class Attributes {
 	}
 
 	/**
-	 * @param objectId req'd int the object id
-	 * @param option   opt'l arr optional array
-	 * @param dc       opt'l str the dataset to use
+	 * @param int $objectId req'd the object id
+	 * @param array $options opt'l
+	 * @param string|null $dc opt'l the dataset to use
 	 *
 	 * @return array(
 	 * 	'attribute_name' => $string,
@@ -256,7 +256,7 @@ class Attributes {
 	 * Note: $options can be used to introduce new variables
 	 */
 	public static function getOptionAttributes( $objectId, $options = [], $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -318,10 +318,10 @@ class Attributes {
 	}
 
 	/** @brief getOptionsAttributeOption Template
-	 * @param attributeId     req'd int
-	 * @param optionMeaningId opt'l int/nul
-	 * @param languageId      req'd str/arr
-	 * @param option          opt'l str
+	 * @param int $attributeId req'd
+	 * @param int|null $optionMeaningId opt'l
+	 * @param int|int[] $languageId req'd
+	 * @param string|null $option opt'l
 	 * 	- multiple multiple lines
 	 * 	- exists   returns boolean, depending whether the queried values exists or not.
 	 * @see use OwDatabaseAPI::getOptionAttributeOptions instead.
@@ -380,15 +380,15 @@ class Attributes {
 	}
 
 	/**
-	 * @param attributeId req'd int the attribute id
-	 * @param languageId  opt'l int optional array
-	 * @param dc          opt'l str the dataset to use
+	 * @param int $attributeId req'd the attribute id
+	 * @param int|null $languageId opt'l
+	 * @param string|null $dc opt'l the dataset to use
 	 *
-	 * @return str The Attribute Name
+	 * @return string The Attribute Name
 	 * @return if not exist, null
 	 */
 	public static function getAttributeName( $attributeId, $languageId = null, $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -423,15 +423,15 @@ class Attributes {
 	/**
 	 * @brief Returns the Attribute Id of an Expression and/or a language id
 	 *
-	 * @param attributeExpression req'd int The expression
-	 * @param languageId          opt'l int The language id
-	 * @param dc                  opt'l str The dataset to use
+	 * @param int $attributeExpression req'd The expression
+	 * @param int|null $languageId opt'l The language id
+	 * @param string|null $dc opt'l The dataset to use
 	 *
 	 * @return int the Option Attribute Id
 	 * @return if not exist, null
 	 */
 	public static function getClassAttributeId( $attributeExpression, $languageId = null, $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -473,10 +473,10 @@ class Attributes {
 	/**
 	 * @brief Returns the meaning_relations table's details via relation_id
 	 *
-	 * @param objectId req'd int The object id
-	 * @param options  opt'l arr An optional parameters
+	 * @param int $objectId req'd The object id
+	 * @param array $options Optional parameters
 	 * * "option['test'] = true" used to test the function
-	 * @param dc       opt'l str The WikiLexicalData dataset
+	 * @param string|null $dc opt'l The WikiLexicalData dataset
 	 *
 	 * @return if exist, array( meaning1_id, relationtype_mid, meaning2_mid)
 	 * @return if not, array()
@@ -485,10 +485,9 @@ class Attributes {
 	 * Though you can access this function, it is highly recommended that you
 	 * use the static function OwDatabaseAPI::getRelationIdRelationAttribute instead.
 	 * Also note that this function currently includes all data, even removed ones.
-	 *
 	 */
 	public static function getRelationIdRelation( $objectId, $options, $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );

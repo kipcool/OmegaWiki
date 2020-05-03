@@ -28,7 +28,7 @@ require_once "../../OmegaWiki/WikiDataTables.php";
 
 ob_end_flush();
 
-/*
+/**
  * This function wil retrieve a list of the data sets defined in this
  * database and return it as an array
  */

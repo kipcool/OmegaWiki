@@ -183,7 +183,6 @@ class VersionedTable extends Table {
 	 * Due to a bug in MySQL it is often advisible to set $unversioned to false
 	 * as the MySQL might get confused when such an index is present.
 	 */
-
 	protected function createVersionedIndexes( $name, $versionedEnd, $versionedStart, $unversioned, array $columns ) {
 		$result = [];
 

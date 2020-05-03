@@ -272,11 +272,11 @@ class SpecialSuggest extends SpecialPage {
 	 * in the user language or in English
 	 */
 	private function getSQLToSelectPossibleAttributes( $definedMeaningId, $attributesLevel, $syntransId, $annotationAttributeId, $attributesType ) {
-		global $wgDefaultClassMids, $wgIso639_3CollectionId, $wgDBprefix;
+		global $wgDefaultClassMids, $wgIso639_3CollectionId;
 
 		$classMids = $wgDefaultClassMids;
 
-		if ( ( !is_null( $syntransId ) ) && ( !is_null( $wgIso639_3CollectionId ) ) ) {
+		if ( ( $syntransId !== null ) && ( $wgIso639_3CollectionId !== null ) ) {
 			// find the language of the syntrans and add attributes of that language
 			// by adding the language DM to the list of default classes
 			// this first query returns the language_id
@@ -692,7 +692,7 @@ class SpecialSuggest extends SpecialPage {
 	 * Writes an html table from a sql table corresponding to the list of classes, as shown by
 	 * http://www.omegawiki.org/index.php?title=Special:Suggest&query=class
 	 *
-	 * @param $queryResult the result of a SQL query to be made into an html table
+	 * @param stdClass[] $queryResult the result of a SQL query to be made into an html table
 	 */
 	function getClassAsRecordSet( $queryResult ) {
 		// Setting the two column, with titles
@@ -797,10 +797,10 @@ class SpecialSuggest extends SpecialPage {
 	}
 
 	/**
-	* returns a table with three columns for selecting a DM:
-	* spelling / language / definition
-	* The three together represent a specific (unique) defined_meaning_id
-	*/
+	 * returns a table with three columns for selecting a DM:
+	 * spelling / language / definition
+	 * The three together represent a specific (unique) defined_meaning_id
+	 */
 	private function getDefinedMeaningAsRecordSet( $queryResult ) {
 		$definitionAttribute = new Attribute( "definition", wfMessage( 'ow_Definition' )->text(), "definition" );
 
@@ -824,10 +824,10 @@ class SpecialSuggest extends SpecialPage {
 	}
 
 	/**
-	* returns a table with three columns for selecting a Syntrans:
-	* spelling / language / definition
-	* The three together represent a specific (unique) syntrans_sid
-	*/
+	 * returns a table with three columns for selecting a Syntrans:
+	 * spelling / language / definition
+	 * The three together represent a specific (unique) syntrans_sid
+	 */
 	private function getSyntransAsRecordSet( $queryResult ) {
 		$definitionAttribute = new Attribute( "definition", wfMessage( 'ow_Definition' )->text(), "definition" );
 

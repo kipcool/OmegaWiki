@@ -449,7 +449,7 @@ class RecordSetRecordSelector extends WrappingEditor {
 
 class DefinedMeaningContextEditor extends WrappingEditor {
 	public function view( IdStack $idPath, $value ) {
-		if ( is_null( $value ) ) {
+		if ( $value === null ) {
 			return;
 		}
 		$definedMeaningId = (int)$value->definedMeaningId;
@@ -466,11 +466,11 @@ class DefinedMeaningContextEditor extends WrappingEditor {
 	}
 
 	public function edit( IdStack $idPath, $value ) {
-		if ( is_null( $idPath ) ) {
+		if ( $idPath === null ) {
 			throw new Exception( "Null provided for idPath while trying to edit()" );
 		}
 
-		if ( is_null( $value ) ) {
+		if ( $value === null ) {
 			throw new Exception( "Null provided for value while trying to edit()" );
 		}
 
@@ -502,7 +502,7 @@ class DefinedMeaningContextEditor extends WrappingEditor {
 
 class ObjectContextEditor extends WrappingEditor {
 	public function view( IdStack $idPath, $value ) {
-		if ( is_null( $value ) ) {
+		if ( $value === null ) {
 			return;
 		}
 		$o = OmegaWikiAttributes::getInstance();
@@ -521,11 +521,11 @@ class ObjectContextEditor extends WrappingEditor {
 	}
 
 	public function edit( IdStack $idPath, $value ) {
-		if ( is_null( $idPath ) ) {
+		if ( $idPath === null ) {
 			throw new Exception( "SyntransContextEditor: Null provided for idPath while trying to edit()" );
 		}
 
-		if ( is_null( $value ) ) {
+		if ( $value === null ) {
 			throw new Exception( "SyntransContextEditor: Null provided for value while trying to edit()" );
 		}
 

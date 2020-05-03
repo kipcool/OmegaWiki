@@ -2,12 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"GerardM",
+			"Mar(c)",
 			"SPQRobin",
 			"Shirayuki",
 			"Siebrand",
-			"Tvdm",
 			"Sjoerddebruin",
-			"Mar(c)"
+			"Tvdm"
 		]
 	},
 	"wikidata-desc": "Voegt een wiki-achtige database toe voor verschillende soorten inhoud",

@@ -139,7 +139,9 @@ jQuery(document).ready( function( $ ) {
 		return thisData;
 	}
 
-	// @return  HTML string of synonyms from external source to choose from.
+	/**
+	 * @return string HTML string of synonyms from external source to choose from.
+	 */
 	function getExtSynonym( rwWords, dmId, langId, src ) {
 		var includedWord = '';
 		rwWords.forEach(function( theWord ){

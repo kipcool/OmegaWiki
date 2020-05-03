@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  * Created on 9 nov 2007
  *
@@ -39,7 +38,7 @@ abstract class ApiWikiDataFormatBase extends ApiFormatBase {
 		$this->errorMessages = [];
 	}
 
-	public function addDefinedMeaningRecord( & $dm ) {
+	public function addDefinedMeaningRecord( &$dm ) {
 		$this->dmRecords[] = $dm;
 	}
 

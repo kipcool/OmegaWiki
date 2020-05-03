@@ -234,16 +234,16 @@ class SpecialPopUpEditor extends SpecialPage {
 	 * adds a line in recentchanges to notify that annotations were edited
 	 */
 	protected function updateRecentChange( $syntransId ) {
-		global $wgUser;
 		$now = wfTimestampNow();
 		$summary = 'Edited annotations via popup';
+		$user = $this->getUser();
 
 		$expressionId = getExpressionIdFromSyntrans( $syntransId );
 		$expression = getExpression( $expressionId );
 		$spelling = $expression->spelling;
 		$expressionTitle = Title::makeTitle( NS_EXPRESSION, $spelling );
 
-		RecentChange::notifyEdit( $now, $expressionTitle, false, $wgUser, $summary, 0, $now, false );
+		RecentChange::notifyEdit( $now, $expressionTitle, false, $user, $summary, 0, $now, false );
 	}
 
 	protected function getGroupName() {

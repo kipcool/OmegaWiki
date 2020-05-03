@@ -7,7 +7,6 @@ require_once "Record.php";
  * a hierarchical structure of Records and RecordSets. The name IdStack might
  * not be accurate anymore and might be renamed to something else like RenderContext.
  */
-
 class IdStack {
 	protected $keyStack;
 	protected $idStack = [];

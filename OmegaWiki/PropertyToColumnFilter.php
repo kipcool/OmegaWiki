@@ -4,6 +4,7 @@ require_once 'Attribute.php';
 
 interface AttributeIDFilter {
 	public function filter( array $attributeIDs );
+
 	public function leavesOnlyOneOption();
 }
 
@@ -98,7 +99,6 @@ class ExcludeAttributeIDsFilter implements AttributeIDFilter {
  *   | PubMed       | ...           |
  *   +--------------+---------------+
  */
-
 class PropertyToColumnFilter {
 	public $attributeIDs;   	// Array containing the defined meaning ids of the attributes that should be filtered
 	protected $attribute;   	// Attribute

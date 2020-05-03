@@ -111,7 +111,6 @@ $wgWldSearchWordsOption = false;
  *   $wgPropertyToColumnFilters = array(
  *     new PropertyToColumnFilter("references", "References", array(1000, 2000, 3000)) // Defined meaning ids are the attribute ids to filter
  *   )
- *
  */
 $wgPropertyToColumnFilters = [];
 
@@ -121,20 +120,20 @@ $wgPropertyToColumnFilters = [];
  * - the URL can have a dataset parameter
  * - there is a global default
  * - there can be defaults for different user groups
- * @param $dc	optional, for convenience.
+ * @param int|null $dc optional, for convenience.
  * 		if the dataset context is already set, will
-		return that value, else will find the relevant value
- * @return prefix (without underscore)
+ * 		return that value, else will find the relevant value
+ * @return string prefix (without underscore)
  */
 function wdGetDataSetContext( $dc = null ) {
 	global $wgRequest, $wdDefaultViewDataSet, $wdGroupDefaultView, $wgUser,
 		$wdCurrentContext;
 
 	# overrides
-	if ( !is_null( $dc ) ) {
+	if ( $dc !== null ) {
 		return $dc; # local override
 	}
-	if ( !is_null( $wdCurrentContext ) ) {
+	if ( $wdCurrentContext !== null ) {
 		return $wdCurrentContext; # global override
 	}
 

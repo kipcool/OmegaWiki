@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Beeyan",
 			"Bennylin",
 			"Farras",
 			"Irwangatot",
@@ -8,8 +9,7 @@
 			"Iwan Novirion",
 			"Kandar",
 			"Rex",
-			"Shirayuki",
-			"Beeyan"
+			"Shirayuki"
 		]
 	},
 	"wikidata-desc": "Menambahkan basis data serupa-wiki untuk beragam tipe isi",

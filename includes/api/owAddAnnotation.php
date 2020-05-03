@@ -432,8 +432,6 @@ class AddAnnotation extends ApiBase {
 	}
 
 	public function processBatch( $wikiPage ) {
-		global $params;
-
 		$csvWikiPageTitle = Title::newFromText( $wikiPage );
 		$csvWikiPage = new WikiPage( $csvWikiPageTitle );
 
@@ -645,7 +643,7 @@ class AddAnnotation extends ApiBase {
 		}
 		// Get Attribute Id from expression Id
 		$this->attributeId = getTextAttributeOptionsAttributeMidFromExpressionId( $attributeExpressionId );
-		if ( is_null( $this->attributeId ) ) {
+		if ( $this->attributeId === null ) {
 			return [ 'error' => [
 					'code' => 'not exist: attribute_mid',
 					'info' => "attribute ($attribute) does not exist"
@@ -799,7 +797,7 @@ class AddAnnotation extends ApiBase {
 		// Get attribute_id from attribute expression Id
 		$this->attributeId = getOptionAttributeOptionsAttributeIdFromExpressionId( $attributeExpressionId, $languageNameDMId, $levelMeaningId );
 
-		if ( is_null( $this->attributeId ) ) {
+		if ( $this->attributeId === null ) {
 			return [ 'error' => [
 					'code' => 'not exist: attribute_id',
 					'info' => "attribute ($attribute) does not exist"
@@ -809,7 +807,7 @@ class AddAnnotation extends ApiBase {
 		// Get option_mid from option expression Id
 		$optionMeaningId = getOptionAttributeOptionsOptionMidFromExpressionId( $optionExpressionId );
 
-		if ( is_null( $optionMeaningId ) ) {
+		if ( $optionMeaningId === null ) {
 			return [ 'error' => [
 					'code' => 'not exist: option_mid',
 					'info' => "attribute ($option) does not exist"

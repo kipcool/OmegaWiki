@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ата",
-			"Piramidion"
+			"Piramidion",
+			"Ата"
 		]
 	},
 	"apiow-desc": "OmegaWiki — розширення WikiLexicalData до MediaWiki api.php",

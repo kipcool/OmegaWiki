@@ -8,11 +8,12 @@
 			"Andriykopanytsia",
 			"Base",
 			"Olvin",
+			"Piramidion",
 			"Prima klasy4na",
 			"Riwnodennyk",
-			"Тест",
+			"Vlad5250",
 			"Ата",
-			"Piramidion"
+			"Тест"
 		]
 	},
 	"wikidata-desc": "Додає вікі-подібну базу даних для різних типів контенту",
@@ -226,7 +227,8 @@
 	"ow_suggest_clear": "Очистити",
 	"ow_nstab_definedmeaning": "визначене значення",
 	"ow_nstab_edit_copy": "редагувати копію",
-	"right-addlanguage": "додавання і зміна мовних налаштувань",
+	"action-addlanguage": "додавання і зміну мовних налаштувань",
+	"right-addlanguage": "Додавання і зміна мовних налаштувань",
 	"ow_shown_datasets": "Показані набори даних",
 	"prefs-ow-lang": "Мови",
 	"ow_pref_lang_switch": "<strong>Показувати лише вибрані мови</strong>",

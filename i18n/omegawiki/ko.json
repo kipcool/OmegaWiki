@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"아라",
-			"Ykhwong"
+			"Ykhwong",
+			"아라"
 		]
 	},
 	"apiow-desc": "미디어위키 api.php의 오메가위키의 위키어휘데이터 확장 기능",

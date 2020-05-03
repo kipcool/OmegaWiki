@@ -5,7 +5,9 @@ require_once 'OmegaWikiAttributes.php';
 
 interface Record {
 	public function getStructure();
+
 	public function getAttributeValue( $attribute );
+
 	public function project( Structure $structure );
 }
 
@@ -85,9 +87,7 @@ class ArrayRecord implements Record {
 	}
 
 	/**
-	 *
-	 * @param $values Array to write into the record, by order of the structure
-	 *
+	 * @param array $values Array to write into the record, by order of the structure
 	 */
 	public function setAttributeValuesByOrder( $values ) {
 		$atts = $this->structure->getAttributes();
@@ -98,10 +98,8 @@ class ArrayRecord implements Record {
 		}
 	}
 
-	/*
-	 *
-	 * @param $record Another record object whose values get written into this one
-	 *
+	/**
+	 * @param Record $record Another Record object whose values get written into this one
 	 */
 	public function setSubRecord( Record $record ) {
 		foreach ( $record->getStructure()->getAttributes() as $attribute ) {

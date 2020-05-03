@@ -5,15 +5,21 @@ $specificXMLParser;
 
 interface XMLElementHandler {
 	public function getHandlerForNewElement( $name );
+
 	public function setAttributes( $attributes );
+
 	public function processData( $data );
+
 	public function close();
+
 	public function notify( $childHandler );
 }
 
 interface XMLParser {
 	public function startElement( $parser, $name, $attributes );
+
 	public function characterData( $parser, $data );
+
 	public function endElement( $parser );
 }
 

@@ -42,7 +42,7 @@ $wgExtensionCredits['other'][] = [
 		'庄向荣',
 		'Purodha Blissenbach'
 	],
-	'url'             => 'http://www.mediawiki.org/wiki/Extension:WikiLexicalData',
+	'url'             => 'https://www.mediawiki.org/wiki/Extension:WikiLexicalData',
 	'descriptionmsg'  => 'wikidata-desc',
 ];
 

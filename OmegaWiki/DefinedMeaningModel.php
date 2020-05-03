@@ -31,8 +31,8 @@ class DefinedMeaningModel {
 	 * Construct a new DefinedMeaningModel for a particular DM.
 	 * You need to call loadRecord() to load the actual data.
 	 *
-	 * @param $definedMeaningId Integer: the database ID of the DM
-	 * @param $params Array: optional parameters to pass to the constructor
+	 * @param int $definedMeaningId the database ID of the DM
+	 * @param array $params optional parameters to pass to the constructor
 	 * can be "viewinformation" of type ViewInformation, or "dataset" of type DataSet
 	 * or "syntransid" which is an integer
 	 */
@@ -65,18 +65,17 @@ class DefinedMeaningModel {
 	 * If $this->definingExpression is set, it will also check if the spelling
 	 * of the defining expression matches
 	 *
-	 * @param Boolean If true, checks beyond the dataset context and will
+	 * @param bool $searchAllDataSets If true, checks beyond the dataset context and will
 	 *                return the first match. Always searches current
 	 *                context first.
-	 * @param Boolean Switch dataset context if match outside default is found.
+	 * @param bool $switchContext Switch dataset context if match outside default is found.
 	 *
-	 * @return DataSet object in which the DM was found, or null.
-	 *
+	 * @return DataSet|null object in which the DM was found, or null.
 	 */
 	public function checkExistence( $searchAllDataSets = false, $switchContext = false ) {
 		global $wdCurrentContext;
 		$match = $this->checkExistenceInDataSet( $this->dataset );
-		if ( !is_null( $match ) ) {
+		if ( $match !== null ) {
 			$this->exists = true;
 			return $match;
 		} else {
@@ -90,7 +89,7 @@ class DefinedMeaningModel {
 		foreach ( $datasets as $currentSet ) {
 			if ( $currentSet->getPrefix() != $this->dataset->getPrefix() ) {
 				$match = $this->checkExistenceInDataSet( $currentSet );
-				if ( !is_null( $match ) ) {
+				if ( $match !== null ) {
 					$this->exists = true;
 					if ( $switchContext ) {
 						$wdCurrentContext = $match;
@@ -107,10 +106,10 @@ class DefinedMeaningModel {
 	public function CheckIfStub() {
 		$dataset = $this->getDataset();
 		$id = $this->getId();
-		if ( is_null( $dataset ) ) {
+		if ( $dataset === null ) {
 			throw new Exception( "DefinedMeaningModel->isStub: Dataset is null." );
 		}
-		if ( is_null( $id ) ) {
+		if ( $id === null ) {
 			throw new Exception( "DefinedMeaningModel->isStub: Id is null." );
 		}
 		require_once "Copy.php";
@@ -118,12 +117,9 @@ class DefinedMeaningModel {
 	}
 
 	/**
-	 * @param DataSet where to look
-	 * @param Integer Defined Meaning Id
-	 * @param String  Spelling
-	 * @return DataSet or null
+	 * @param DataSet $dc where to look
+	 * @return DataSet|null
 	 * @see checkExistence
-	 *
 	 */
 	public function checkExistenceInDataSet( DataSet $dc ) {
 		$definingExpression = $this->definingExpression;
@@ -144,12 +140,12 @@ class DefinedMeaningModel {
 		if ( !$dmRow || !$dmRow->defined_meaning_id ) {
 			return null;
 		}
-		if ( is_null( $definingExpression ) ) {
+		if ( $definingExpression === null ) {
 			return $dc;
 		} else {
 			$expid = (int)$dmRow->expression_id;
 			$storedExpression = getExpression( $expid, $dc );
-			if ( is_null( $storedExpression ) ) {
+			if ( $storedExpression === null ) {
 				return null;
 			}
 			if ( $storedExpression->spelling != $definingExpression ) {
@@ -161,13 +157,14 @@ class DefinedMeaningModel {
 		}
 		return $dc;
 	}
+
 	/**
 	 * Load the associated record object.
 	 *
 	 * @return Boolean indicating success.
 	 */
 	public function loadRecord() {
-		if ( is_null( $this->exists ) ) {
+		if ( $this->exists === null ) {
 			$this->checkExistence();
 		}
 
@@ -178,7 +175,8 @@ class DefinedMeaningModel {
 		$id = $this->getId();
 		$view = $this->getViewInformation();
 		/** @todo FIXME: Records should be loaded using helpers rather than
-		  global functions! */
+		 * global functions!
+		 */
 		$o = OmegaWikiAttributes::getInstance();
 
 		$record = new ArrayRecord( $o->definedMeaning->type );
@@ -216,7 +214,6 @@ class DefinedMeaningModel {
 
 	/**
 	 * @todo FIXME - work in progress
-	 *
 	 */
 	public function save() {
 		initializeOmegaWikiAttributes( $this->viewInformation );
@@ -341,7 +338,7 @@ class DefinedMeaningModel {
 	/** Copy this defined meaning to specified dataset-context
 	 * Warning: This is somewhat new  code, which still needs
 	 * shoring up.
-	 * @param $dataset	dataset to copy to.
+	 * @param string $dataset dataset to copy to.
 	 * @return 	defined meaning id in the new dataset
 	 */
 	public function copyTo( $dataset ) {
@@ -410,12 +407,11 @@ class DefinedMeaningModel {
 	 * specified by language code. Caches the syntrans records
 	 * in an array.
 	 *
-	 * @param languageCode str Language code of the synonym/translation to look for
-	 * @param fallbackCode str Fallback to use if not found
+	 * @param string $languageCode Language code of the synonym/translation to look for
+	 * @param string $fallbackCode Fallback to use if not found
 	 * @return Spelling or null if not found at all
 	 *
 	 * @todo make fallback optional
-	 *
 	 */
 	public function getSyntransByLanguageCode( $languageCode, $fallbackCode = WLD_ENGLISH_LANG_WMKEY ) {
 		if ( array_key_exists( $languageCode, $this->syntrans ) ) {
@@ -423,7 +419,7 @@ class DefinedMeaningModel {
 		}
 
 		$syntrans = getSpellingForLanguage( $this->getId(), $languageCode, $fallbackCode, $this->dataset );
-		if ( !is_null( $syntrans ) ) {
+		if ( $syntrans !== null ) {
 			$this->syntrans[$languageCode] = $syntrans;
 		}
 		return $syntrans;
@@ -438,7 +434,7 @@ class DefinedMeaningModel {
 			$definingExpression = $this->getDefiningExpression();
 			$id = $this->getId();
 
-			if ( is_null( $definingExpression ) or is_null( $id ) ) {
+			if ( $definingExpression === null or $id === null ) {
 				return null;
 			}
 
@@ -451,10 +447,10 @@ class DefinedMeaningModel {
 	}
 
 	/**
-	 * @return HTML link including the wrapping tag
-	 * @param String Language code of synonym/translation to show
-	 * @param String Fallback code
+	 * @param string $languageCode Language code of synonym/translation to show
+	 * @param string $fallbackCode Fallback code
 	 * @throws Exception If title object is missing
+	 * @return string HTML link including the wrapping tag
 	 */
 	public function getHTMLLink( $languageCode, $fallbackCode = WLD_ENGLISH_LANG_WMKEY ) {
 		$titleObject = $this->getTitleObject();
@@ -474,13 +470,11 @@ class DefinedMeaningModel {
 	}
 
 	/**
-	 *
 	 * Splits title of the form "Abc (123)" into text and number
 	 * components.
 	 *
-	 * @param titleText str the title to analyze
+	 * @param string $titleText the title to analyze
 	 * @return Array of the two components or null.
-	 *
 	 */
 	public static function splitTitleText( $titleText ) {
 		$bracketPosition = strrpos( $titleText, "(" );
@@ -519,10 +513,9 @@ class DefinedMeaningModel {
 
 	/**
 	 * Fetch from DB if necessary
-	 *
 	 */
 	public function getDefiningExpression() {
-		if ( is_null( $this->definingExpression ) ) {
+		if ( $this->definingExpression === null ) {
 			return OwDatabaseAPI::definingExpression( $this->getId(), $this->getDataset() );
 		}
 		return $this->definingExpression;

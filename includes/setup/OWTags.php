@@ -1,7 +1,6 @@
 <?php
 /**
  * Tags Setup
- *
  */
 
  # Alert the user that this is not a valid access point to MediaWiki if they try to access the special pages file directly.

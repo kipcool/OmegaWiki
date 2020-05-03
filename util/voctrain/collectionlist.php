@@ -5,6 +5,7 @@ require_once "functions.php";
 class CollectionList {
 	private $list;
 	private $fetcher = null;
+
 	public function __construct( $fetcher ) {
 		$this->fetcher = $fetcher;
 		$this->fetch();

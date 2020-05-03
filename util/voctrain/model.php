@@ -8,7 +8,8 @@ require_once "collectionlist.php";
 require_once "vocview.php";
 
 /** provide access to the actual back-end persistent classes.
- * also does some minor database-wonkery*/
+ * also does some minor database-wonkery
+ */
 class Model {
 
 public $view;
@@ -84,7 +85,6 @@ public $view;
 	}
 
 	/** create a new Exercise from scratch.
-	#
 	 */
 	public function createExercise( $userName, $size, $collection_id, $questionLanguages, $answerLanguages, $hide ) {
 		# this can be simplified for now...

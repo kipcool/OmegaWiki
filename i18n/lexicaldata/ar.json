@@ -1,14 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alaa",
 			"DRIHEM",
 			"Meno25",
+			"Mr. Ibrahem",
 			"OsamaK",
 			"Tarawneh",
-			"زكريا",
-			"Alaa",
-			"Mr. Ibrahem",
-			"ديفيد"
+			"ديفيد",
+			"زكريا"
 		]
 	},
 	"wikidata-desc": "يضيف قاعدة بيانات ذات طابع الويكي لأنواع عديدة من المحتويات",
@@ -224,6 +224,7 @@
 	"ow_suggest_clear": "إفراغ",
 	"ow_nstab_definedmeaning": "معنى معرف",
 	"ow_nstab_edit_copy": "عدل النسخة",
+	"action-addlanguage": "إضافة وتغيير إعدادات اللغات",
 	"right-addlanguage": "إضافة وتغيير إعدادات اللغات",
 	"ow_shown_datasets": "مجموعات البيانات الظاهرة.",
 	"prefs-omegawiki": "أوميجاويكي",
@@ -262,5 +263,6 @@
 	"ow-stat-text-annotations": "{{PLURAL:$1|شرح نص|شروح نصوص}}",
 	"ow-stat-option-annotations": "{{PLURAL:$1|شرح خيار|شروح خيارات}}",
 	"ow-stat-all-is": "الكل = $1",
+	"ow-stat-percent": "$1&nbsp;%",
 	"specialpages-group-omegawiki": "أوميجاويكي"
 }

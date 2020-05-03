@@ -2,16 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"Aotake",
+			"Endres",
 			"Fryed-peach",
 			"Hosiryuhosi",
 			"JtFuruhata",
-			"Shirayuki",
-			"Whym",
-			"青子守歌",
-			"Rxy",
-			"Sujiniku",
 			"Otokoume",
-			"Endres"
+			"Rxy",
+			"Shirayuki",
+			"Sujiniku",
+			"Whym",
+			"青子守歌"
 		]
 	},
 	"wikidata-desc": "さまざまな種類のコンテンツ用のウィキ風データベースを追加する",
@@ -219,6 +219,7 @@
 	"ow_suggest_clear": "消去",
 	"ow_nstab_definedmeaning": "意味定義",
 	"ow_nstab_edit_copy": "複製を編集",
+	"action-addlanguage": "言語設定の追加/変更",
 	"right-addlanguage": "言語設定を追加/変更",
 	"ow_shown_datasets": "表示されたデータ集合",
 	"prefs-omegawiki": "OmegaWiki",

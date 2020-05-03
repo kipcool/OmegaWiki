@@ -11,18 +11,17 @@ require_once 'PropertyToColumnFilter.php';
  * use ViewInformation do not care about this. They are supposed to respect the settings provided wherever
  * possible.
  */
-
 class ViewInformation {
 	/**
-	* array containing a list of languages that the user wants to display
-	* so that other languages are hidden.
-	* If the array is empty, all languages are displayed.
-	*/
+	 * array containing a list of languages that the user wants to display
+	 * so that other languages are hidden.
+	 * If the array is empty, all languages are displayed.
+	 */
 	public $filterLanguageList;
 
 	/**
-	* The language of the expression to display, according to the url &explang=...
-	*/
+	 * The language of the expression to display, according to the url &explang=...
+	 */
 	public $expressionLanguageId;
 
 	public $queryTransactionInformation;
@@ -31,9 +30,6 @@ class ViewInformation {
 
 	protected $propertyToColumnFilters;
 
-	/**
-	 * Constructor
-	 */
 	public function __construct() {
 		global $wgRequest, $wgUser;
 

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hiong3-eng5"
+			"Hiong3-eng5",
+			"唐吉訶德的侍從"
 		]
 	},
 	"langman_langname": "Gú-giân bêng-chheng：",
@@ -20,5 +21,6 @@
 	"ow_Language": "Gú-giân",
 	"ow_Multiple_meanings": "\"$1\" ê tēng-gī",
 	"ow_Text": "Bûn-jī",
-	"ow_User": "Iōng-chiá"
+	"ow_User": "Iōng-chiá",
+	"ow-stat-languages": "{{PLURAL:$1|Gú-giân|Gú-giân}}"
 }

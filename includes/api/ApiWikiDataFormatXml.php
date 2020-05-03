@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  * Created on Sep 19, 2006
  *
@@ -23,7 +22,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  */
-
 class ApiWikiDataFormatXml extends ApiWikiDataFormatBase {
 
 	private $mRootElemName = 'wikidata';
@@ -127,7 +125,7 @@ class ApiWikiDataFormatXml extends ApiWikiDataFormatBase {
 		return $doc;
 	}
 
-	private function appendRecord( & $record, $elmName, & $parentElm ) {
+	private function appendRecord( &$record, $elmName, &$parentElm ) {
 		$aExcluded = & $this->excluded;
 		if ( isset( $aExcluded[$elmName] ) ) {
 			return;

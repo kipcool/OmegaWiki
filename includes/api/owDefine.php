@@ -38,7 +38,6 @@ class Define extends SynonymTranslation {
 	}
 
 	public function execute() {
-		global $wgUser, $wgOut;
 		$options = [];
 
 		// Get the parameters
@@ -217,7 +216,7 @@ class Define extends SynonymTranslation {
 	protected function defining( $definedMeaningId, $languageId, $options = [], $moduleName = null ) {
 		$syntrans = [];
 
-		if ( is_null( $moduleName ) ) {
+		if ( $moduleName === null ) {
 			$moduleName = 'ow_define';
 		}
 
@@ -277,7 +276,7 @@ class Define extends SynonymTranslation {
 		$language = null;
 
 		$remove_langIdArray = 0;
-		if ( is_null( $moduleName ) ) {
+		if ( $moduleName === null ) {
 			$moduleName = 'ow_define';
 		}
 

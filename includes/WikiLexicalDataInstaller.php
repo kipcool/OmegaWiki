@@ -8,12 +8,6 @@ class WikiLexicalDataDatabaseUpdater extends ExtensionDatabaseUpdater {
 
 	public $lexicalItemDMId, $iso6393CollectionId;
 
-	/** constructor
-	 */
-	public function __construct() {
-		parent::__construct();
-	}
-
 	/** Initial WikiLexical Install setup
 	 */
 	public function setWikiLexicalDataSettings( $dc, $fallbackName = null, $text = null, $languageId = WLD_ENGLISH_LANG_ID ) {
@@ -141,7 +135,6 @@ class WikiLexicalDataDatabaseUpdater extends ExtensionDatabaseUpdater {
 	protected function bootStrappedDefinedMeanings() {
 		// Admin user
 		$userId = 1;
-		global $wgDBprefix;
 
 		// check that it is really a fresh install
 		$hasCollection = $this->dbw->selectField(

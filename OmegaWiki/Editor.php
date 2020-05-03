@@ -1,7 +1,5 @@
 <?php
-/** @file
- *
- */
+
 require_once "WikiDataGlobals.php";
 require_once 'IdStack.php';
 require_once "HTMLtable.php";
@@ -15,7 +13,6 @@ require_once "OmegaWikiDatabaseAPI.php";
 define( 'EOL', "\n" ); # Makes human (and vim :-p) readable output (somewhat...)
 # define('EOL',""); # Output only readable by browsers
 
-
 // added the "allow add controller" to be able to control the usage of the add field in different circumstances
 // instances of this class are used instead of the boolean "allowAdd" in the editors
 class AllowAddController {
@@ -24,6 +21,7 @@ class AllowAddController {
 	public function __construct( $value ) {
 		$this->value = $value;
 	}
+
 	public function check( $idPath ) {
 		return $this->value;
 	}
@@ -59,20 +57,29 @@ class ShowEditFieldForClassesChecker extends ShowEditFieldChecker {
 
 interface Editor {
 	public function getAttribute();
+
 	public function getUpdateAttribute();
+
 	public function getAddAttribute();
 
 	public function showsData( $value );
+
 	public function view( IdStack $idPath, $value );
+
 	public function showEditField( IdStack $idPath );
+
 	public function edit( IdStack $idPath, $value );
+
 	public function add( IdStack $idPath );
+
 	public function save( IdStack $idPath, $value );
 
 	public function getUpdateValue( IdStack $idPath );
+
 	public function getAddValues( IdStack $idPath );
 
 	public function getEditors();
+
 	public function getAttributeEditorMap();
 }
 
@@ -142,7 +149,7 @@ abstract class DefaultEditor implements Editor {
 
 	/**
 	 * set the editor as collapsible or not collapsible
-	 * @param $value boolean
+	 * @param bool $value
 	 */
 	public function setCollapsible( $value ) {
 		$this->isCollapsible = $value;
@@ -918,7 +925,9 @@ abstract class ScalarEditor extends DefaultEditor {
 	}
 
 	abstract public function getViewHTML( IdStack $idPath, $value );
+
 	abstract public function getEditHTML( IdStack $idPath, $value );
+
 	abstract public function getInputValue( $id );
 
 	public function getUpdateValue( IdStack $idPath ) {
@@ -1404,13 +1413,13 @@ class BooleanEditor extends ScalarEditor {
 	}
 }
 
-/*
-* IdenticalMeaningEditor
-* in view mode, shows either = or ≈
-* in edit mode, shows a combobox to choose.
-* for html we use strings "true" and "false" instead of "0" and "1"
-* to be sure that an undefined value will not be considered as a "0".
-*/
+/**
+ * IdenticalMeaningEditor
+ * in view mode, shows either = or ≈
+ * in edit mode, shows a combobox to choose.
+ * for html we use strings "true" and "false" instead of "0" and "1"
+ * to be sure that an undefined value will not be considered as a "0".
+ */
 class IdenticalMeaningEditor extends ScalarEditor {
 	protected $defaultValue;
 	// textValues is an array of "value" => "how the value is displayed"
@@ -2046,7 +2055,7 @@ class RecordSetListEditor extends RecordSetEditor {
 				// check if we have an extraHierarchyCaption to add
 				// this can happen for example if we sort by part of speeches and want to display that.
 				$extraLevelName = $arrayRecordSet->getExtraHierarchyCaption( $i );
-				if ( !is_null( $extraLevelName ) ) {
+				if ( $extraLevelName !== null ) {
 					// close the previous extraHierarchy if needed
 					if ( $extraLevelUlOpen ) {
 						$result .= Html::closeElement( 'ul' );

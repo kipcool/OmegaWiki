@@ -11,7 +11,7 @@ class UMLSImportResult {
 	public $sourceAbbreviations = [];
 }
 
-/*
+/**
  * Import UMLS entirely. Be sure to have started a transaction first!
  */
 function importUMLSFromDatabase( $server, $databaseName, $userName, $password, $sources = null ) {

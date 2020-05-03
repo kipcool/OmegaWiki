@@ -24,7 +24,7 @@ class DefinedMeaning extends DefaultWikidataApplication {
 		$dmInfo = DefinedMeaningModel::splitTitleText( $titleText );
 
 		// WikiData compatibility. Using title with dmid only
-		if ( is_null( $dmInfo ) && is_numeric( $titleText ) ) {
+		if ( $dmInfo === null && is_numeric( $titleText ) ) {
 			$dmInfo = [
 				"expression" => null,
 				"id" => $titleText
@@ -34,7 +34,7 @@ class DefinedMeaning extends DefaultWikidataApplication {
 		$dmNumber = $dmInfo["id"];
 
 		// Title doesn't have an ID in it (or ID 0)
-		if ( is_null( $dmInfo ) || !$dmNumber ) {
+		if ( $dmInfo === null || !$dmNumber ) {
 			$wgOut->showErrorPage( 'errorpagetitle', 'ow_dm_badtitle' );
 			return false;
 		}
@@ -50,7 +50,7 @@ class DefinedMeaning extends DefaultWikidataApplication {
 
 		// The defining expression is likely incorrect for some reason. Let's just
 		// try looking up the number.
-		if ( is_null( $match ) && !empty( $dmInfo["expression"] ) ) {
+		if ( $match === null && !empty( $dmInfo["expression"] ) ) {
 			$this->definedMeaningModel->setDefiningExpression( null );
 			$dmInfo["expression"] = null;
 			$match = $this->definedMeaningModel->checkExistence( true, true );
@@ -58,7 +58,7 @@ class DefinedMeaning extends DefaultWikidataApplication {
 
 		// The defining expression is either bad or missing. Let's redirect
 		// to the correct URL.
-		if ( empty( $dmInfo["expression"] ) && !is_null( $match ) ) {
+		if ( empty( $dmInfo["expression"] ) && $match !== null ) {
 			$this->definedMeaningModel->loadRecord();
 			$title = Title::newFromText( $this->definedMeaningModel->getWikiTitle() );
 			$url = $title->getFullURL();
@@ -68,7 +68,7 @@ class DefinedMeaning extends DefaultWikidataApplication {
 		}
 
 		// Bad defining expression AND bad ID! :-(
-		if ( is_null( $match ) ) {
+		if ( $match === null ) {
 			$wgOut->showErrorPage( 'errorpagetitle', 'ow_dm_missing' );
 			return false;
 		}
@@ -121,12 +121,12 @@ class DefinedMeaning extends DefaultWikidataApplication {
 
 		// check that the constructed DM actually exists in the database
 		$match = $dmModel->checkExistence( true, true );
-		if ( is_null( $match ) ) {
+		if ( $match === null ) {
 			$wgOut->showErrorPage( 'errorpagetitle', 'ow_dm_missing' );
 			return false;
 		}
 
-		if ( is_null( $dmModel->getRecord() ) ) {
+		if ( $dmModel->getRecord() === null ) {
 			$wgOut->addHTML( wfMessage( "ow_db_consistency__not_found" )->text() . " ID:$definedMeaningId" );
 			return;
 		}
@@ -156,7 +156,7 @@ class DefinedMeaning extends DefaultWikidataApplication {
 
 		// check that the constructed DM actually exists in the database
 		$match = $dmModel->checkExistence( true, true );
-		if ( is_null( $match ) ) {
+		if ( $match === null ) {
 			$wgOut->showErrorPage( 'errorpagetitle', 'ow_dm_missing' );
 			return false;
 		}
@@ -307,8 +307,7 @@ class DefinedMeaning extends DefaultWikidataApplication {
 	 * something purdy and maintainable)
 	 */
 	protected function getCopyPanel2() {
-		global
-			$wgScriptPath, $wgCommunity_dc;
+		global $wgCommunity_dc;
 
 		$html = "Copy to:<br />\n";
 		$datasets = wdGetDatasets();
@@ -340,16 +339,16 @@ class DefinedMeanings {
 	/** @brief Returns the spelling of an expression used as
 	 * the definedMeaning namespace of a given DM
 	 *
-	 * @param definedMeaningId int
-	 * @param dc               str
+	 * @param int $definedMeaningId
+	 * @param string|null $dc
 	 *
-	 * @return expression str
+	 * @return string expression
 	 * @return if not exists, null
 	 *
 	 * @see use OwDatabaseAPI::definingExpression instead
 	 */
 	public static function definingExpression( $definedMeaningId, $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -380,7 +379,7 @@ class DefinedMeanings {
 	 * @see use OwDatabaseAPI::getDefinedMeaningSpelling instead
 	 */
 	public static function getSpelling( $definedMeaning, $languageId = null, $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -430,10 +429,10 @@ class DefinedMeanings {
 	/**
 	 * @brief Returns the defined_meaning table's DefinedMeaning id via translatedContentId
 	 *
-	 * @param translatedContentId req'd int The object id
-	 * @param $options            opt'l arr An optional parameters
+	 * @param int $translatedContentId req'd The object id
+	 * @param array $options opt'l An optional parameters
 	 * * "option['test'] = true" used to test the function
-	 * @param $dc                 opt'l str The WikiLexicalData dataset
+	 * @param string|null $dc opt'l The WikiLexicalData dataset
 	 *
 	 * @return array( int defined_meaning_id )
 	 * @return if not exists, array()
@@ -442,10 +441,9 @@ class DefinedMeanings {
 	 * Though you can access this function, it is highly recommended that you
 	 * use the static function OwDatabaseAPI::getTranslatedContentIdDefinedMeaningId instead.
 	 * Also note that this function currently includes all data, even removed ones.
-	 *
 	 */
 	public static function getTranslatedContentIdDefinedMeaningId( $translatedContentId, $options, $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -478,16 +476,16 @@ class DefinedMeanings {
 	}
 
 	/**
-	 * @param languageId req'd int The language id
-	 * @param options    opt'l arr An optional parameters
+	 * @param int $languageId req'd The language id
+	 * @param array $options opt'l An optional parameters
 	 * * "option['test'] = true" used to test the function
-	 * @param dc         opt'l str The WikiLexicalData dataset
+	 * @param string|null $dc opt'l The WikiLexicalData dataset
 	 *
 	 * @return an array of "Defined Meaning Id" objects for a language
 	 * @return if not exists, null
 	 */
 	public static function getLanguageIdDefinedMeaningId( $languageId, $options = [], $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -540,8 +538,8 @@ class DefinedMeanings {
 	 * 	- or else in English
 	 * 	- or else in any language
 	 *
-	 * @param definedMeaningId int
-	 * @return spelling str
+	 * @param int $definedMeaningId
+	 * @return string spelling
 	 *
 	 * @note Though you can access this function, it is highly recommended that you
 	 * use the static function OwDatabaseAPI::getDefinedMeaningExpression instead.
@@ -575,9 +573,9 @@ class DefinedMeanings {
 
 	/** @brief Returns one spelling of an expression corresponding to a given DM in a given language
 	 *
-	 * @param definedMeaningId int
-	 * @param languageId       int
-	 * @return spelling str
+	 * @param int $definedMeaningId
+	 * @param int $languageId
+	 * @return string spelling
 	 * @return if not exists, ""
 	 *
 	 * @note Though you can access this function, it is highly recommended that you
@@ -611,8 +609,8 @@ class DefinedMeanings {
 
 	/** @brief Returns one spelling of an expression corresponding to a given DM in any language
 	 *
-	 * @param $definedMeaningId
-	 * @return spelling str
+	 * @param int $definedMeaningId
+	 * @return string spelling
 	 * @return if not exists, ""
 	 *
 	 * @note Though you can access this function, it is highly recommended that you

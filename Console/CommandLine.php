@@ -7,7 +7,6 @@
  * with values are possible for the option. By specifying null for $possibleValues
  * no check will be performed on possible values.
  */
-
 class CommandLineOption {
 	protected $name;
 	protected $isRequired;
@@ -58,7 +57,6 @@ class CommandLineOption {
  * encountered or a required option is not specified, an error message will be displayed and
  * the application stops.
  */
-
 function parseCommandLine( array $options ) {
 	global
 		$argv;

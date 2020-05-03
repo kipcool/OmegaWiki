@@ -408,7 +408,7 @@ function getExpressionMeaningsRecordSet( $expressionId, $exactMeaning, ViewInfor
 		], __METHOD__
 	);
 
-	if ( !is_null( $wgWldSortingAnnotationDM ) ) {
+	if ( $wgWldSortingAnnotationDM !== null ) {
 		$sortArray = [];
 	}
 	foreach ( $queryResult as $syntrans ) {
@@ -425,7 +425,7 @@ function getExpressionMeaningsRecordSet( $expressionId, $exactMeaning, ViewInfor
 			]
 		);
 
-		if ( !is_null( $wgWldSortingAnnotationDM ) ) {
+		if ( $wgWldSortingAnnotationDM !== null ) {
 			// create the sortArray for sorting the records according to some annotations
 			// we sort according to syntrans_attributes (lexical annotations) and among
 			// them we use only the option attributes (i.e. annotations from a closed list)
@@ -456,7 +456,7 @@ function getExpressionMeaningsRecordSet( $expressionId, $exactMeaning, ViewInfor
 		} // if not null wgWldSortingAnnotationDM
 	} // foreachs $syntrans
 
-	if ( !is_null( $wgWldSortingAnnotationDM ) ) {
+	if ( $wgWldSortingAnnotationDM !== null ) {
 		// here we can sort the recordSet according to annotations
 		$recordSet->sortRecord( $sortArray );
 	}
@@ -507,7 +507,7 @@ function getExpressionsRecordSet( $spelling, ViewInformation $viewInformation, $
 		if ( !$expressionId ) {
 			// nothing in the user language (or English). Find anything
 			$expression = getExpressionIdAnyLanguage( $spelling );
-			if ( is_null( $expression ) ) {
+			if ( $expression === null ) {
 				// nothing at all, return the empty arrayrecord
 				return $result;
 			}
@@ -703,8 +703,6 @@ function filterObjectAttributesRecord( Record $sourceRecord, array &$attributeId
 }
 
 function getTranslatedContentRecordSet( $translatedContentId, ViewInformation $viewInformation ) {
-	global $wgWikidataDataSet;
-
 	$o = OmegaWikiAttributes::getInstance();
 	$dc = wdGetDataSetContext();
 	$dbr = wfGetDB( DB_REPLICA );

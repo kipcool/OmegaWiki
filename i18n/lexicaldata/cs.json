@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Cvanca",
+			"Dvorapa",
 			"Kuvaly",
 			"Matěj Grabovský",
 			"Mormegil",
 			"Reaperman",
-			"Cvanca",
-			"Walter Klosse",
-			"Dvorapa"
+			"Walter Klosse"
 		]
 	},
 	"wikidata-desc": "Přidává databázi na principu wiki pro různé druhy obsahu",

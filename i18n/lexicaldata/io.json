@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Joao Xavier",
 			"Malafaya",
-			"Robin van der Vliet",
-			"Joao Xavier"
+			"Robin van der Vliet"
 		]
 	},
 	"langman_langname": "Nomo dil linguo:",
@@ -18,6 +18,7 @@
 	"ow_save": "Registragar",
 	"ow_history": "Versionaro",
 	"ow_uiprefs": "WikiLexicalData",
+	"ow_none_selected": "Nulo selektesis",
 	"ow_transaction_user": "Uzantonomo:",
 	"ow_transaction_object": "Objekto",
 	"ow_transaction_summary": "Rezumo",
@@ -42,9 +43,11 @@
 	"ow_OptionAttribute": "Proprajo",
 	"ow_OptionAttributeOption": "Selekto",
 	"ow_OptionAttributeOptions": "Selekti",
+	"ow_OtherLanguages": "Altra lingui:",
 	"ow_PopupAnnotation": "Noto",
 	"ow_Relations": "Relati",
 	"ow_Spelling": "Espelado",
+	"ow_SuggestHint": "Kliktez por modifikar la selekturo",
 	"ow_Synonyms": "Sinonimi",
 	"ow_SynonymsAndTranslations": "Sinonimi e tradukuri",
 	"ow_Source": "Fonto",
@@ -66,13 +69,15 @@
 	"ow_copy_help": "La helpo ne existas ankore.",
 	"ow_class_attr_type_link": "Ligilo",
 	"ow_show": "Montrez",
-	"ow_upload": "Adkargez",
+	"ow_upload": "Kargez",
 	"ow_create": "Kreez",
 	"ow_suggest_previous": "Antea",
 	"ow_suggest_next": "Sequanta",
 	"ow_suggest_clear": "Vakuigar",
 	"ow_nstab_definedmeaning": "senco definita",
+	"prefs-ow-lang": "Lingui",
 	"ow_addFromExtAPI_title": "Adjuntez informo de API",
 	"ow-stat-meanings-link": "senci",
-	"ow-stat-meanings": "{{PLURAL:$1|senco|senci}}"
+	"ow-stat-meanings": "{{PLURAL:$1|senco|senci}}",
+	"ow-stat-languages": "{{PLURAL:$1|Linguo|Lingui}}"
 }

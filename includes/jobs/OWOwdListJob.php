@@ -6,7 +6,6 @@
  * TODO
  * Monolingual:
  * Final download file would be compressed as owl_fra_csv.zip
- *
  */
 
 global $wgWldOwScriptPath, $wgWldIncludesScriptPath;

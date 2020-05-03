@@ -7,7 +7,10 @@ module.exports = function ( grunt ) {
 	grunt.initConfig( {
 		banana: {
 			lexicaldata: 'i18n/lexicaldata/',
-			omegawiki: 'i18n/omegawiki/'
+			omegawiki: 'i18n/omegawiki/',
+			options: {
+				requireLowerCase: 'initial'
+			}
 		},
 		jshint: {
 			all: [

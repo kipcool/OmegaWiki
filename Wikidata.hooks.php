@@ -4,6 +4,11 @@ require_once "OmegaWiki/WikiDataGlobals.php";
 
 class WikiLexicalDataHooks {
 
+	/**
+	 * @param OutputPage $out
+	 * @param Skin $skin
+	 * @return true
+	 */
 	public static function onBeforePageDisplay( $out, $skin ) {
 		global $wgContLang;
 
@@ -43,7 +48,6 @@ class WikiLexicalDataHooks {
 	}
 
 	/** @brief OmegaWiki-specific preferences
-	 *
 	 */
 	public static function onGetPreferences( $user, &$preferences ) {
 /*
@@ -165,7 +169,7 @@ class WikiLexicalDataHooks {
 	public static function onGoClicked( $allSearchTerms, &$title ) {
 		$term = $allSearchTerms[0];
 		$title = Title::newFromText( $term );
-		if ( is_null( $title ) ) {
+		if ( $title === null ) {
 			return true;
 		}
 
@@ -234,7 +238,6 @@ class WikiLexicalDataHooks {
 	}
 
 	/** @brief basic lexical statistic data for Special:Statistics
-	 *
 	 */
 	public static function onSpecialStatsAddExtra( &$extraStats ) {
 		$extra = new SpecialOWStatistics;

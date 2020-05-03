@@ -1,6 +1,5 @@
 <?PHP
 
-
 /** where do I find the omegawiki api */
 $ow_api_location = 'http://www.omegawiki.org/api.php?action=wikidata';
 

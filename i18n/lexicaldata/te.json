@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Chaduvari",
 			"Kiranmayee",
 			"Mpradeep",
 			"Veeven"
@@ -83,7 +84,7 @@
 	"ow_IncomingRelations": "లోనికి వచ్చు చుట్టరికాలు",
 	"ow_GotoSource": "మూలానికి వెళ్ళు",
 	"ow_Language": "భాష",
-	"ow_Multiple_meanings": "\"$1\" యొక్క అర్థాలు",
+	"ow_Multiple_meanings": "\"$1\" అర్థాలు",
 	"ow_NewExactMeaning": "కొత్త ఖచ్చిత అర్థం",
 	"ow_OptionAttribute": "లక్షణం",
 	"ow_OptionAttributeOption": "ఎంపిక",
@@ -117,8 +118,8 @@
 	"ow_Property": "లక్షణం",
 	"ow_Value": "విలువ",
 	"ow_added": "చేర్చినవి",
-	"ow_removed": "తొలగించబడింది",
-	"ow_meaningsoftitle": "\"$1\" యొక్క అర్థాలు",
+	"ow_removed": "తొలగించాం",
+	"ow_meaningsoftitle": "\"$1\" అర్థాలు",
 	"ow_meaningsofsubtitle": "<em>వికీ లింకు:</em> [[$1]]",
 	"ow_Permission_denied": "<h2>అనుమతి నిరాకరించాం</h2>",
 	"ow_copy_no_action_specified": "దయచేసి ఒక చర్యని స్పష్టంచెయ్యండి",

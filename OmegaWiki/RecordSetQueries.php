@@ -127,7 +127,7 @@ function queryRecordSet( $recordSetStructureId, QueryTransactionInformation $tra
 	// @note Even though the above uses the query function, we need not convert this
 	// to select function, since the generated SQL adds the mySQL prefix automatically. ~he
 
-	if ( !is_null( $recordSetStructureId ) ) {
+	if ( $recordSetStructureId !== null ) {
 		$structure = new Structure( $recordSetStructureId, $allAttributes );
 	} else {
 		$structure = new Structure( $allAttributes );

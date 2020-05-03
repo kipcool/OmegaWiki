@@ -232,7 +232,7 @@ class SpecialOWDownloads extends SpecialPage {
 	}
 
 	protected function processText( $text ) {
-		global $wgServer, $wgScriptPath, $wgScript, $wgWldDownloadScriptPath;
+		global $wgServer, $wgScriptPath, $wgWldDownloadScriptPath;
 
 		$presetMyLine = '<table class="wikitable">' . "\n" .
 			'<tr>' . "\n" .

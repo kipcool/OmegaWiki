@@ -1,21 +1,25 @@
 {
 	"@metadata": {
 		"authors": [
+			"A Retired User",
+			"A2093064",
 			"Alexsh",
 			"Ch.Andrew",
+			"Cwlin0416",
+			"Kly",
+			"LNDDYL",
 			"Liangent",
+			"Liuxinyu970226",
 			"Mark85296341",
 			"Oapbtommy",
+			"Sanmosa",
 			"Simon Shek",
 			"Tntchn",
 			"Wrightbus",
-			"Cwlin0416",
-			"LNDDYL",
-			"Liuxinyu970226",
+			"Xiplus",
+			"予弦",
 			"烈羽",
-			"Kly",
-			"Sanmosa",
-			"A2093064"
+			"神樂坂秀吉"
 		]
 	},
 	"wikidata-desc": "為各種類型的內容加入 wiki 資料庫",
@@ -110,7 +114,7 @@
 	"ow_conceptmapping_title": "概念對應",
 	"ow_conceptmapping_help": "<p>可行的操作：<ul>\n<li>&action=insert&<data_context_prefix>=<defined_id>&...  插入一個對應</li>\n<li>&action=get&concept=<concept_id> 讀取對應的返回內容</li>\n<li>&action=list_sets 回傳一個可用資料環境前綴與該所參照內容的清單。</li>\n<li>&action=get_associated&dm=<defined_meaning_id>&dc=<dataset_context_prefix> 為一個概念中的已定義含意回傳所有其它內容</li>\n<li>&action=help 顯示有用的幫助</li>\n</ul></p>",
 	"ow_conceptmapping_uitext": "<p>概念對應允許您確認出在兩邊不同資料集裡內容一致的定義含意。</p>",
-	"ow_conceptmapping_no_action_specified": "動作“$1”不被支持。",
+	"ow_conceptmapping_no_action_specified": "不支持動作“$1”。",
 	"ow_dm_OK": "確定",
 	"ow_dm_not_present": "沒有輸入",
 	"ow_dm_not_found": "在資料庫或異常裡查無內容",
@@ -229,6 +233,7 @@
 	"ow_suggest_clear": "清除",
 	"ow_nstab_definedmeaning": "已定義的含義",
 	"ow_nstab_edit_copy": "編輯副本",
+	"action-addlanguage": "新增與變更語言設定",
 	"right-addlanguage": "新增與變更語言設定",
 	"ow_shown_datasets": "所顯示的數據集",
 	"prefs-ow-lang": "語言",

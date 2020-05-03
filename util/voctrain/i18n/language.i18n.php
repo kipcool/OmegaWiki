@@ -3,7 +3,6 @@
 # messages for voctrain
 # now mediawiki style -ish
 
-
 # fallback array. English is default!
 # (although it's always nice to specify)
 # if set to false, there is no fallback

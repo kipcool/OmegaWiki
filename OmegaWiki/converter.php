@@ -7,6 +7,7 @@ require_once 'Transaction.php';
 require_once "Wikidata.php";
 interface Converter {
 	public function getStructure();
+
 	public function convert( $record );
 }
 

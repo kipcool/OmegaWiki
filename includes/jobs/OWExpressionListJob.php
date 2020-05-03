@@ -1,7 +1,6 @@
 <?php
 /**
  * Create a list of Expressions
- *
  */
 global $wgWldOwScriptPath, $wgWldIncludesScriptPath;
 require_once $wgWldOwScriptPath . 'Expression.php';

@@ -135,10 +135,10 @@ class ObjectCopier {
 	protected function read() {
 		$dc1 = $this->dc1;
 		$id = $this->id;
-		if ( is_null( $dc1 ) ) {
+		if ( $dc1 === null ) {
 			throw new Exception( "ObjectCopier: provided source dataset(dc1) is null" );
 		}
-		if ( is_null( $id ) ) {
+		if ( $id === null ) {
 			throw new Exception( "ObjectCopier: provided identifier is null" );
 		}
 
@@ -152,7 +152,7 @@ class ObjectCopier {
 	 */
 	protected function identical() {
 		$uuid = mysql_escape_string( $this->object["UUID"] );
-		if ( is_null( $uuid ) ) {
+		if ( $uuid === null ) {
 			throw new Exception( "ObjectCopier: UUID is null" );
 		}
 		$dc2 = $this->dc2;
@@ -170,9 +170,11 @@ class ObjectCopier {
 	 * possible TODO: Currently induces the target table from the original
 	 * destination table name.
 	 * Perhaps would be wiser to get the target table as an (override) parameter.
+	 *
+	 * @return int
 	 */
 	function write( $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = $this->dc2;
 		}
 
@@ -192,16 +194,19 @@ class ObjectCopier {
 	 * See also database schema documentation (insofar available) or
 	 * do sql statement DESC <dc>_objects for table format (where <dc> is a valid
 	 * dataset prefix)
+	 *
+	 * @param string|null $uuid
+	 * @return int
 	 */
 	function create_key( $uuid = null ) {
-		if ( is_null( $this->tableName ) ) {
+		if ( $this->tableName === null ) {
 			throw new Exception( "ObjectCopier: Object autovivification requires a table name to assist in creating an object. No table name was provided." );
 		}
 		$this->object["object_id"] = null; # just to be on some kind of safe side.
 		$this->object["table"] = "unset_" . $this->tableName; # slightly hackish, this
 		$this->object["original_id"] = 0;	# no idea what this is for.
 
-		if ( is_null( $uuid ) ) {
+		if ( $uuid === null ) {
 			$uuid_query = CopyTools::doQuery( "SELECT UUID()" );
 			$uuid = $uuid_query["UUID()"];
 		}
@@ -212,9 +217,10 @@ class ObjectCopier {
 
 	/**
 	 * create a valid object key in the objects table, and return it
-	 * @param $dc	the dataset (prefix) to create the object in
-	 * @param $table	which table is the object originally from? (minus dataset prefix)
-	 * @param $uuid  (optional) : override the auto-generated uuid with this one.
+	 * @param string $dc the dataset (prefix) to create the object in
+	 * @param string $table which table is the object originally from? (minus dataset prefix)
+	 * @param string|null $uuid (optional) : override the auto-generated uuid with this one.
+	 * @return string
 	 */
 	public static function makeObjectId( $dc, $table, $uuid = null ) {
 		# Sorta Exploiting internals, because -hey- we're internal
@@ -230,7 +236,7 @@ class ObjectCopier {
 	/** Duplicate thds object ientry in the destination (dc2) dataset
 	 */
 	public function dup() {
-		if ( is_null( $this->id ) ) {
+		if ( $this->id === null ) {
 			if ( $this->autovivify ) {
 				$this->create_key();
 			} else {
@@ -245,7 +251,7 @@ class ObjectCopier {
 			} else {
 				$id = $this->id;
 				$table = $this->object["table"];
-				if ( is_null( $table ) ) {
+				if ( $table === null ) {
 					$table = $this->tableName;
 				}
 				$dc1 = $this->dc1;
@@ -267,8 +273,8 @@ class ObjectCopier {
 }
 
 /** obtain an expression definition from the database
- * @param $expression_id	the id of the expression
- * @param $dc1			dataset to READ expression FROM
+ * @param int $expression_id the id of the expression
+ * @param string $dc1 dataset to READ expression FROM
  */
 function expression( $expression_id, $dc1 ) {
 	return CopyTools::getRow( $dc1, "expression", "WHERE expression_id=$expression_id", true );
@@ -351,15 +357,15 @@ function write_translated_content( $dc1, $dc2, $tcid, $content ) {
  *      possible issues with UMLS
  */
 function dup_translated_content( $dc1, $dc2, $tcid ) {
-	if ( is_null( $dc1 ) ) {
+	if ( $dc1 === null ) {
 		throw new Exception( "dup_translated_content: dc1 is null" );
 	}
 
-	if ( is_null( $dc2 ) ) {
+	if ( $dc2 === null ) {
 		throw new Exception( "dup_translated_content: dc2 is null" );
 	}
 
-	if ( is_null( $tcid ) ) {
+	if ( $tcid === null ) {
 		throw new Exception( "dup_translated_content: tcid is null" );
 	}
 	/* XXX UMLS problem? Knewcode tickets #258, #330
@@ -482,7 +488,7 @@ class CollectionCopier extends Copier {
 	}
 
 	public function read( $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = $this->dc1;
 		}
 		$dmid = $this->dmid;
@@ -558,7 +564,7 @@ class CollectionCopier extends Copier {
 			return $row["object_id"];
 		}
 
-		if ( is_null( $srcrow["object_id"] ) ) {
+		if ( $srcrow["object_id"] === null ) {
 			$srcrow["object_id"] = $this->objectCopier->getId();
 			$collection_id = $srcrow["collection_id"];
 			$member_mid = $srcrow["member_mid"];
@@ -607,10 +613,10 @@ class DefinedMeaningCopier {
 
 	protected function read() {
 		$dmid = $this->dmid;
-		if ( is_null( $dmid ) ) {
+		if ( $dmid === null ) {
 			throw new Exception( "DefinedMeaningCopier: read(): cannot read a dmid that is null" );
 		}
-		if ( is_null( $this->dc1 ) ) {
+		if ( $this->dc1 === null ) {
 			throw new Exception( "DefinedMeaningCopier: read(): cannot read from dc1: is null. " );
 		}
 		$this->defined_meaning = CopyTools::getRow( $this->dc1, "defined_meaning", "where defined_meaning_id=$dmid", true );
@@ -619,7 +625,7 @@ class DefinedMeaningCopier {
 
 	public function getDM() {
 		$dm = $this->defined_meaning;
-		if ( is_null( $dm ) ) {
+		if ( $dm === null ) {
 			$dm = $this->read();
 		}
 		return $this->defined_meaning;
@@ -716,6 +722,10 @@ class DefinedMeaningCopier {
 		return ( $dst_dmid > 0 ) ? $dst_dmid : null;
 	}
 
+	/**
+	 * @param string $dc
+	 * @param string|int $uuid
+	 */
 	public static function finishConceptMapping( $dc, $uuid ) {
 		if ( $uuid == - 1 ) {  # CreateConceptMapping did not create a new mapping,
 			return; # You can't finish that which was never started.
@@ -802,19 +812,19 @@ class CopyTools {
 	public static function checkIfStub( $dataset, $id ) {
 		$dmcopier = new DefinedMeaningCopier( $id, $dataset, null );
 		$dm1 = $dmCopier->read();
-		if ( is_null( $dm1 ) ) {
+		if ( $dm1 === null ) {
 			throw new Exception( "Could not find a defined meaning with id '$id' in dataset '$dataset'" );
 		}
 		$original_dataset = $dm1["stub"];
 
-		if ( is_null( $original_dataset ) ) {
+		if ( $original_dataset === null ) {
 			return null;
 		}
 
 		$obcopier = new ObjectCopier( $id, $dataset, $original_dataset );
 		$original_id = $obcopier->getIdenticalId();
 
-		if ( is_null( $original_id ) ) {
+		if ( $original_id === null ) {
 			throw new Exception( "CopyTools::checkIfStub: Database integrity failed: item marked as stub, but no original entry found." );
 		}
 
@@ -849,7 +859,7 @@ class CopyTools {
 		}
 
 		# The id might exist, but still be null.
-		if ( is_null( $virtual_user_id ) ) {
+		if ( $virtual_user_id === null ) {
 			$virtual_user_id = 0;
 		}
 
@@ -861,9 +871,9 @@ class CopyTools {
 	}
 
 	/** retrieve a single row from the database as an associative array
-	 * @param $dc		the dataset prefix we need
-	 * @param $table	the name of the table (minus dataset prefix)
-	 * @param $where		the actual WHERE clause we need to uniquely find our row
+	 * @param string $dc the dataset prefix we need
+	 * @param string $table the name of the table (minus dataset prefix)
+	 * @param string $where the actual WHERE clause we need to uniquely find our row
 	 * @return an associative array, representing our row. \
 	 * 	keys=column headers, values = row contents
 	 */
@@ -886,9 +896,9 @@ class CopyTools {
 	}
 
 	/** retrieve multiple rows from the database, as an array of associative arrays.
-	 * @param $dc		the dataset prefix we need
-	 * @param $table	the name of the table (minus dataset prefix)
-	 * @param $where		the actual WHERE clause we need to uniquely find our row
+	 * @param string $dc the dataset prefix we need
+	 * @param string $table the name of the table (minus dataset prefix)
+	 * @param string $where the actual WHERE clause we need to uniquely find our row
 	 * @return an array of associative arrays, representing our rows.  \
 	 * 	each associative array is structured with:		\
 	 * 	keys=column headers, values = row contents
@@ -903,8 +913,8 @@ class CopyTools {
 	}
 
 	/** utility function, maps bootstrapped defined meanings across multiple datasets.
-	 * @param $key_dataset: any dataset which has a known-good bootstrap table. We assume all others are the same.
-	 * @param $datasets: an array with the datasets to map (eg: array("uw", "sp", "umls") ).
+	 * @param string $key_dataset any dataset which has a known-good bootstrap table. We assume all others are the same.
+	 * @param string[] $datasets an array with the datasets to map (eg: array("uw", "sp", "umls") ).
 	 */
 	public static function map_bootstraps( $key_dataset, $datasets ) {
 		$bootstrap_raw = self::getRows( $key_dataset, "bootstrapped_defined_meanings", "" );
@@ -922,9 +932,9 @@ class CopyTools {
 	}
 
 	/** Takes two 2 columns from getRows, and forms them into an associative array.
-	 * @param $table	output from getRows
-	 * @param $key_column	string, name of column to use as keys
-	 * @param $value_column	string, name of column to use as values
+	 * @param string $table output from getRows
+	 * @param string $key_column name of column to use as keys
+	 * @param string $value_column name of column to use as values
 	 * @return an associative array, made from teh 2 columns specified
 	 */
 	protected static function _table_to_assoc( $table, $key_column, $value_column ) {
@@ -937,10 +947,9 @@ class CopyTools {
 
 	/** Performs an arbitrary SQL query and returns an associative array
 	 * Assumes that only 1 row can be returned!
-	 * @param $query	a valid SQL query
+	 * @param string $query a valid SQL query
 	 * @return an associative array, representing our row. \
 	 * 	keys=column headers, values = row contents
-	 *
 	 */
 	public static function doQuery( $query ) {
 		# $start=CopyTools::stopwatch();
@@ -965,7 +974,7 @@ class CopyTools {
 
 	/** Perform an arbitrary SQL query
 	 *
-	 * @param $query	a valid SQL query
+	 * @param string $query a valid SQL query
 	 * @return an array of associative arrays, representing our rows.  \
 	 * 	each associative array is structured with:		\
 	 * 	keys=column headers, values = row contents
@@ -998,10 +1007,10 @@ class CopyTools {
 	 * (Namely, if either $key or $array is either null or false)
 	 */
 	public static function sane_key_exists( $key, $array ) {
-		if ( is_null( $key ) or $key == false ) {
+		if ( $key === null or $key == false ) {
 			return false;
 		}
-		if ( is_null( $array ) or $array == false ) {
+		if ( $array === null or $array == false ) {
 			return false;
 		}
 		return array_key_exists( $key, $array );
@@ -1011,7 +1020,7 @@ class CopyTools {
 	 * inverse of mysql_fetch_assoc
 	 * takes an associative array as parameter, and inserts data
 	 * into table as a single row (keys=column names, values = data to be inserted)
-	/* see: http://www.php.net/mysql_fetch_assoc (Comment by R. Bradly, 14-Sep-2006)
+	 * /* see: http://www.php.net/mysql_fetch_assoc (Comment by R. Bradly, 14-Sep-2006)
 	 */
 	public static function mysql_insert_assoc( $my_table, $my_array ) {
 		$start = self::stopwatch();
@@ -1025,7 +1034,7 @@ class CopyTools {
 		$sql_comma = $sql;
 		foreach ( $my_array as $key => $value ) {
 			$sql = $sql_comma;
-			if ( is_null( $value ) ) {
+			if ( $value === null ) {
 				$value = "DEFAULT";
 			} else {
 				$value = '"' . mysql_real_escape_string( $value ) . '"';
@@ -1063,7 +1072,7 @@ class CopyTools {
 		// we add the enclosing quotes at the same time
 		$sql_comma = $sql;
 		foreach ( $my_array as $key => $value ) {
-			if ( !is_null( $value ) ) {
+			if ( $value !== null ) {
 				$sql = $sql_comma;
 				$value = '"' . mysql_real_escape_string( $value ) . '"';
 				$sql .= " `$key`=$value";
@@ -1113,7 +1122,7 @@ class CopyTools {
 
 }
 
-/**Copying uw_class_membership*/
+/** Copying uw_class_membership */
 class ClassMembershipCopier extends Copier {
 
 	protected $old_class_member_mid;
@@ -1135,8 +1144,6 @@ class ClassMembershipCopier extends Copier {
 	public function dup() {
 		$memberships = $this->read();
 		$this->write( $memberships );
-
-		return;
 	}
 
 	/** read all class memberships associated with the dmid */
@@ -1201,7 +1208,7 @@ class ClassAttributesCopier extends Copier {
 	 * because in this case, the class_mid is the key characteristic
 	 */
 	public function dup() {
-		if ( is_null( $this->src_class_mid ) ) {
+		if ( $this->src_class_mid === null ) {
 			throw new Exception( "ClassAttributesCopier: Can't copy class; is null!" );
 		}
 		$attributes = $this->read();
@@ -1263,7 +1270,7 @@ class ClassAttributesCopier2 extends Copier {
 	 * because in this case, the class_mid is the key characteristic
 	 */
 	public function dup() {
-		if ( is_null( $this->object_id ) ) {
+		if ( $this->object_id === null ) {
 			throw new Exception( "ClassAttributesCopier2: Can't copy class by object_id: is null!" );
 		}
 		$attributes = $this->read();
@@ -1338,6 +1345,7 @@ abstract class Copier {
 		$values = $this->read();
 		return $this->write( $values );
 	}
+
 	/** reads row or rows from table in source dataset (dc1)
 	 * @return row or array of rows for table in mysql_read_assoc() format
 	 */
@@ -1350,7 +1358,9 @@ abstract class Copier {
 	 */
 	// public abstract function write();
 
-	/** @return true if the copied item was already present in the other dataset, false if it wasn't (and we just copied it over) , or null if don't know/error/other.
+	/**
+	 * @return bool|null True if the copied item was already present in the other dataset, false if
+	 *  it wasn't (and we just copied it over) , or null if don't know/error/other.
 	 */
 	public function already_there() {
 		return $this->already_there;
@@ -1375,14 +1385,14 @@ abstract class Copier {
 	 * - make sure that the row refers to the dmid in the *destination* dataset (dc2),
 	 *   instead of the source dataset (dc1).
 	 * - returns True if the defined meaning was already_there().
-	 * @param &$row : row to operate on, passed by reference
-	 * @param $dmid_colum: a column in said row, containing the dmid to operate on
-	 * @param $full=false (optional) : if true, does a dup instead of a dup_stub
+	 * @param array &$row row to operate on, passed by reference
+	 * @param string $dmid_column a column in said row, containing the dmid to operate on
+	 * @param bool $full (optional) if true, does a dup instead of a dup_stub
 	 * @return true if the updated dmid already existed in the destination (dc2) dataset before now
 	 * 	   false if it did not, and we just created it
 	 */
 	protected function doDM( &$row, $dmid_column, $full = false ) {
-		if ( $row[$dmid_column] == 0 or is_null( $row[$dmid_column] ) ) {
+		if ( $row[$dmid_column] == 0 or $row[$dmid_column] === null ) {
 			return true;
 		}
 
@@ -1403,8 +1413,8 @@ abstract class Copier {
 	 * updates the row(passed by reference) with the relevant object_id in the destination
 	 *   dataset (dc2)
 	 *
-	 * @param &$row : row to operate on, passed by reference
-	 * @param $object_column: a column in said row, containing the object reference to operate on
+	 * @param array &$row row to operate on, passed by reference
+	 * @param string $object_column a column in said row, containing the object reference to operate on
 	 * @return true if examination of the objects table reveals that this particular row should already
 	 * 			exist in the destination dataset
 	 * 		false if this particular row does not yet exist in the table in the destination dataset.
@@ -1443,11 +1453,11 @@ abstract class AttributeCopier extends Copier {
 	}
 
 	public static function copy( $dc1, $dc2, $src_object_id, $dst_object_id ) {
-		if ( is_null( $src_object_id ) ) {
+		if ( $src_object_id === null ) {
 			throw new Exception( "AttributeCopier: cannot copy: source object_id=null" );
 		}
 
-		if ( is_null( $dst_object_id ) ) {
+		if ( $dst_object_id === null ) {
 			throw new Exception( "AttributeCopier: cannot copy: destination object_id=null" );
 		}
 		$optionAttributeCopier = new OptionAttributeCopier( $dc1, $dc2, $src_object_id, $dst_object_id );
@@ -1475,12 +1485,12 @@ abstract class AttributeCopier extends Copier {
 
 	protected function read() {
 		$src_object_id = $this->src_object_id;
-		if ( is_null( $src_object_id ) ) {
+		if ( $src_object_id === null ) {
 			throw new Exception( "*AttributeCopier: cannot read: source object_id is null" );
 		}
 
 		$tableName = $this->tableName;
-		if ( is_null( $tableName ) ) {
+		if ( $tableName === null ) {
 			throw new Exception( "*AttributeCopier: cannot read: table name is null" );
 		}
 
@@ -1540,7 +1550,7 @@ class OptionAttributeOptionsCopier extends Copier {
 	protected $tableName = "option_attribute_options"; // Name of the table this class operates on.
 
 	public function __construct( $option_id, $dc1, $dc2 ) {
-		if ( is_null( $option_id ) ) {
+		if ( $option_id === null ) {
 			throw new Exception( "OptionAttributeOptionsCopier: trying to construct with null option_id. No can do compadre." );
 		}
 

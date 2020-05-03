@@ -1,8 +1,8 @@
 <?php
 
 /**
-* Maintenance script to remove duplicate expessions
-*/
+ * Maintenance script to remove duplicate expessions
+ */
 
 $baseDir = __DIR__ . '/../../..';
 require_once $baseDir . '/maintenance/Maintenance.php';
@@ -14,16 +14,14 @@ class RemoveDuplicateSyntrans extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
-		$this->mDescription = "Maintenance tool to remove duplicated Synonyms/Translations\n"
+		$this->addDescription( "Maintenance tool to remove duplicated Synonyms/Translations\n"
 			. 'Example usage: php removeDuplicateSyntrans.php --test=true ' . "\n"
 			. ' or simply' . "\n"
-			. 'php removeDuplicateSyntrans.php' . "\n";
+			. 'php removeDuplicateSyntrans.php' . "\n" );
 		$this->addOption( 'test', 'true for test mode. e.g. --test=true' );
 	}
 
 	public function execute() {
-		global $wdCurrentContext;
-
 		$this->test = false;
 		if ( $this->hasOption( 'test' ) ) {
 			$this->test = true;
@@ -54,7 +52,7 @@ class RemoveDuplicateSyntrans extends Maintenance {
 						// correct the duplication
 						$this->correctSyntransDuplication( $syntrans );
 					if ( !$this->test ) {
-						if ( is_null( $dc ) ) {
+						if ( $dc === null ) {
 							$dc = wdGetDataSetContext();
 						}
 
@@ -119,7 +117,7 @@ class RemoveDuplicateSyntrans extends Maintenance {
 
 	protected function correctSyntransDuplication( $syntrans, $dc = null ) {
 		// find attributes with $syntrans[1] and replace them with $syntrans[0]
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -368,7 +366,7 @@ class RemoveDuplicateSyntrans extends Maintenance {
 	}
 
 	protected function getDuplicateSyntransSyntransToUpdate( $expressionId, $definedMeaningId, $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -401,7 +399,7 @@ class RemoveDuplicateSyntrans extends Maintenance {
 	}
 
 	protected function getDuplicateSyntrans( $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );

@@ -35,8 +35,6 @@ class Express extends Define {
 	}
 
 	public function execute() {
-		global $wgScriptPath;
-
 		// Get the parameters
 		$params = $this->extractRequestParams();
 
@@ -67,7 +65,6 @@ class Express extends Define {
 	}
 
 	/** Cache!
-	 *
 	 */
 	protected function cacheExpress( $spelling, $options = [] ) {
 		$expressCacheKey = 'API:ow_express:dm=' . $spelling;

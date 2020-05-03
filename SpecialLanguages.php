@@ -35,9 +35,9 @@ class SpecialLanguages extends SpecialPage {
 
 	function execute( $par ) {
 		// added $wgDBprefix for wld and mw prefix compatibility
-		global $wgOut, $wgRequest, $wgUser, $wgDBprefix;
+		global $wgOut, $wgRequest, $wgDBprefix;
 		$wgOut->setPageTitle( wfMessage( 'langman_title' )->text() );
-		if ( !$wgUser->isAllowed( 'addlanguage' ) ) {
+		if ( !$this->getUser()->isAllowed( 'addlanguage' ) ) {
 			$wgOut->addHTML( wfMessage( 'langman_not_allowed' )->text() );
 			return false;
 		}
@@ -70,12 +70,8 @@ class SpecialLanguages extends SpecialPage {
 	}
 
 	function showForm() {
-		global $wgOut, $wgVersion;
-		if ( version_compare( $wgVersion, '1.23', '<' ) ) {
-			$action = htmlspecialchars( $this->getTitle()->getLocalURL( 'action=submit' ) );
-		} else {
-			$action = htmlspecialchars( $this->getPageTitle()->getLocalURL( 'action=submit' ) );
-		}
+		global $wgOut;
+		$action = htmlspecialchars( $this->getPageTitle()->getLocalURL( 'action=submit' ) );
 		$wgOut->addHTML(
 <<<END
 <form name="addlanguage" method="post" action="$action">

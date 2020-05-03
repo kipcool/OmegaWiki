@@ -32,15 +32,15 @@ class AddSyntrans extends ApiBase {
 	}
 
 	public function execute() {
-		global $wgUser, $wgOut;
+		$user = $this->getUser();
 
 		// limit access to bots
-		if ( !$wgUser->isAllowed( 'bot' ) ) {
+		if ( !$user->isAllowed( 'bot' ) ) {
 			$this->dieUsage( 'you must have a bot flag to use this API function', 'bot_only' );
 		}
 
 		// keep blocked bots out
-		if ( $wgUser->isBlocked() ) {
+		if ( $user->isBlocked() ) {
 			$this->dieUsage( 'your account is blocked.', 'blocked' );
 		}
 
@@ -259,7 +259,6 @@ class AddSyntrans extends ApiBase {
 	}
 
 	public function owAddSynonymOrTranslation() {
-		global $wgUser;
 		$dc = wdGetDataSetContext();
 
 		// check that the language_id exists

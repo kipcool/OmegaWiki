@@ -2,21 +2,17 @@
 <ruleset>
 	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
 		<exclude name="Generic.CodeAnalysis.UnconditionalIfStatement.Found" />
-		<exclude name="Generic.Files.LineLength.TooLong" />
 		<exclude name="Generic.Files.OneObjectStructurePerFile.MultipleFound" />
 		<exclude name="Generic.NamingConventions.ConstructorName.OldStyle" />
 		<exclude name="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase" />
-		<exclude name="Generic.PHP.ForbiddenFunctions.FoundWithAlternative" />
 		<exclude name="Generic.PHP.NoSilencedErrors.Discouraged" />
 		<exclude name="MediaWiki.Commenting.FunctionAnnotations.UnrecognizedAnnotation" />
 		<exclude name="MediaWiki.Commenting.FunctionComment.DuplicateReturn" />
+		<exclude name="MediaWiki.Commenting.FunctionComment.MissingDocumentationPrivate" />
 		<exclude name="MediaWiki.Commenting.FunctionComment.MissingDocumentationProtected" />
 		<exclude name="MediaWiki.Commenting.FunctionComment.MissingDocumentationPublic" />
-		<exclude name="MediaWiki.Commenting.FunctionComment.MissingParamName" />
 		<exclude name="MediaWiki.Commenting.FunctionComment.MissingParamTag" />
 		<exclude name="MediaWiki.Commenting.FunctionComment.MissingReturn" />
-		<exclude name="MediaWiki.Commenting.FunctionComment.ParamNameNoMatch" />
-		<exclude name="MediaWiki.Commenting.FunctionComment.SpacingAfter" />
 		<exclude name="MediaWiki.Commenting.FunctionComment.WrongStyle" />
 		<exclude name="MediaWiki.Commenting.LicenseComment.InvalidLicenseTag" />
 		<exclude name="MediaWiki.ControlStructures.AssignmentInControlStructures.AssignmentInControlStructures" />
@@ -28,41 +24,22 @@
 		<exclude name="MediaWiki.Usage.DbrQueryUsage.DbrQueryFound" />
 		<exclude name="MediaWiki.Usage.DeprecatedGlobalVariables.Deprecated$wgContLang" />
 		<exclude name="MediaWiki.Usage.DeprecatedGlobalVariables.Deprecated$wgTitle" />
-		<exclude name="MediaWiki.Usage.ForbiddenFunctions.assert" />
 		<exclude name="MediaWiki.Usage.ForbiddenFunctions.exec" />
 		<exclude name="MediaWiki.Usage.ForbiddenFunctions.extract" />
+		<exclude name="MediaWiki.Usage.NullableType.PHP71NullableStyle" />
 		<exclude name="MediaWiki.Usage.SuperGlobalsUsage.SuperGlobals" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$myWordnikAPIKey" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$params" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$relationsObjectAttributesEditor" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wdCurrentContext" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wdTermDBDataSet" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgDBprefix" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgDBtype" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgDefaultClassMids" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgOut" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgRequest" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgScript" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgScriptPath" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgUser" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgWikidataDataSet" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgWldDMValueObjectAttributesEditors" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgWldOptionValueObjectAttributesEditors" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgWldOwScriptPath" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgWldTextValueObjectAttributesEditors" />
-		<exclude name="MediaWiki.VariableAnalysis.UnusedGlobalVariables.UnusedGlobal$wgWldTranslatedTextValueObjectAttributesEditors" />
 		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment.NewLineComment" />
-		<exclude name="PSR2.Classes.ClassDeclaration.CloseBraceSameLine" />
-		<exclude name="PSR2.Classes.PropertyDeclaration.ScopeMissing" />
 		<exclude name="PSR2.Classes.PropertyDeclaration.Underscore" />
-		<exclude name="PSR2.Classes.PropertyDeclaration.VarUsed" />
 		<exclude name="PSR2.Methods.MethodDeclaration.Underscore" />
 		<exclude name="Squiz.Classes.ValidClassName.NotCamelCaps" />
 		<exclude name="Squiz.Operators.ValidLogicalOperators.NotAllowed" />
-		<exclude name="Squiz.PHP.NonExecutableCode.ReturnNotRequired" />
 		<exclude name="Squiz.PHP.NonExecutableCode.Unreachable" />
-		<exclude name="Squiz.Scope.MemberVarScope.Missing" />
 		<exclude name="Squiz.Scope.MethodScope.Missing" />
+	</rule>
+	<rule ref="Generic.Files.LineLength">
+		<properties>
+			<property name="lineLimit" value="330" />
+		</properties>
 	</rule>
 	<file>.</file>
 	<arg name="extensions" value="php,php5,inc" />

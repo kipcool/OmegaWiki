@@ -2,15 +2,14 @@
 # this is still very dirty, since I snarfed most of this from elsewhere. I wrote it, so it's mine :-P
 # released under GPL v2
 
-
 /** provide a namespace for database tools (so we don't clutter up the main namespace with
  * all our utility and tool functions) All functions here are public+static.
  */
 class DBTools {
 
 	/** retrieve a single row from the database as an associative array
-	 * @param $table	the name of the table (minus dataset prefix)
-	 * @param $where		the actual WHERE clause we need to uniquely find our row
+	 * @param string $table the name of the table (minus dataset prefix)
+	 * @param string $where the actual WHERE clause we need to uniquely find our row
 	 * @return an associative array, representing our row. \
 	 * 	keys=column headers, values = row contents
 	 */
@@ -40,10 +39,9 @@ class DBTools {
 
 	/** Performs an arbitrary SQL query and returns an associative array
 	 * Assumes that only 1 row can be returned!
-	 * @param $query	a valid SQL query
+	 * @param string $query a valid SQL query
 	 * @return an associative array, representing our row. \
 	 * 	keys=column headers, values = row contents
-	 *
 	 */
 	public static function doQuery( $query ) {
 		# var_dump($query);
@@ -67,12 +65,11 @@ class DBTools {
 
 	/** Perform an arbitrary SQL query
 	 *
-	 * @param $query	a valid SQL query
+	 * @param string $query a valid SQL query
 	 * @return an array of associative arrays, representing our rows.  \
 	 * 	each associative array is structured with:		\
 	 * 	keys=column headers, values = row contents
 	 */
-
 	public static function doMultirowQuery( $query ) {
 		# var_dump($query);
 		$result = mysql_query( $query );
@@ -100,10 +97,10 @@ class DBTools {
 	 * (Namely, if either $key or $array is either null or false)
 	 */
 	public static function sane_key_exists( $key, $array ) {
-		if ( is_null( $key ) or $key == false ) {
+		if ( $key === null or $key == false ) {
 			return false;
 		}
-		if ( is_null( $array ) or $array == false ) {
+		if ( $array === null or $array == false ) {
 			return false;
 		}
 		return array_key_exists( $key, $array );
@@ -164,7 +161,7 @@ class DBTools {
 		$sql_comma = $sql;
 		foreach ( $my_array as $key => $value ) {
 			$sql = $sql_comma;
-			if ( is_null( $value ) ) {
+			if ( $value === null ) {
 				$value = "DEFAULT";
 			} else {
 				$value = '"' . mysql_real_escape_string( $value ) . '"';
@@ -201,7 +198,7 @@ class DBTools {
 		// we add the enclosing quotes at the same time
 		$sql_comma = $sql;
 		foreach ( $my_array as $key => $value ) {
-			if ( !is_null( $value ) ) {
+			if ( $value !== null ) {
 				$sql = $sql_comma;
 				$value = '"' . mysql_real_escape_string( $value ) . '"';
 				$sql .= " `$key`=$value";
@@ -220,7 +217,7 @@ class DBTools {
 
 		if ( !$result ) {
 			throw new Exception( "Mysql query failed: $sql with error message " . mysql_error() );
-		};
+		}
 
 		if ( $result ) {
 			return true;

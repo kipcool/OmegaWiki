@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Andrei Stroe",
+			"Danutz",
 			"Emily",
 			"Firilacroco",
 			"KlaudiuMihaila",
 			"Mihai",
 			"Minisarm",
-			"Stelistcristi",
-			"Danutz"
+			"Stelistcristi"
 		]
 	},
 	"languages": "Gestionar de limbi",
@@ -138,7 +139,7 @@
 	"copy": "Wikidata:Copiază",
 	"ow_copy_no_action_specified": "Vă rugăm să specificați o acțiune",
 	"ow_copy_help": "Ajutorul nu este încă implementat.",
-	"ow_copy_successful": "<h2>Copiere cu succes</h2>\nDatele par a fi fost copiate cu succes.\nNu uitați să verificați pentru a fi siguri!",
+	"ow_copy_successful": "<h2>Copiere reușită</h2>\nDatele par a fi fost copiate cu succes.\nNu uitați să verificați pentru a fi siguri!",
 	"ow_copy_unsuccessful": "<h3>Copiere fără succes</h3>\nNici o operație de copiere nu a avut loc.",
 	"ow_no_action_specified": "<h3>Nici o acțiune nu a fost specificată</h3>\nPoate ați ajuns la această pagină direct? În mod normal nu ar trebui să fiți aici.",
 	"ow_history_transaction": "Tranzacție:",
@@ -156,5 +157,5 @@
 	"ow_suggest_next": "Următorul",
 	"ow_suggest_clear": "Șterge",
 	"ow_shown_datasets": "Seturi de date afișate",
-	"ow_statistics": "Wikidata: Statistici"
+	"ow_statistics": "Statistici de date lexicale"
 }

@@ -171,7 +171,7 @@ function display_account_settings( $params ) {
 /**
  * obtain languages from request...
  * no input validation is done here !?
- * @param output  can be 'arr' (default) which returns an array,
+ * @param string $output can be 'arr' (default) which returns an array,
  * or ser which returns some kind of string (this should be refactored)
  */
 function get_wdlanguages( $output = 'arr' ) {

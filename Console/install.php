@@ -1,6 +1,6 @@
 <?php
 /** @file
- *  @brief WikiLexicalData install script
+ * @brief WikiLexicalData install script
  *
  * Maintenance script to create a WikiLexicalData extension for mediawiki
  * it generates the tables in a database (passed as parameter) with a defined prefix (passed as parameter)
@@ -23,9 +23,9 @@ class InstallWikiLexicalData extends Maintenance {
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this->mDescription = "Installation by creating the tables and filling them with the minimal necessary data\n"
+		$this->addDescription( "Installation by creating the tables and filling them with the minimal necessary data\n"
 			. 'Example usage: php install.php --prefix=uw '
-			. '--template=wikidataTemplate.sql --datasetname="OmegaWiki community"';
+			. '--template=wikidataTemplate.sql --datasetname="OmegaWiki community"' );
 		$this->addOption( 'freshInstall', 'Drop all tables before creating new ones' );
 		$this->addOption( 'prefix', 'The prefix to use for the relational tables. e.g. --prefix=uw' );
 		$this->addOption( 'template', 'A sql template describing the relational tables. e.g. --template=databaseTemplate.sql' );
@@ -172,7 +172,7 @@ class InstallWikiLexicalData extends Maintenance {
 
 	/** @brief Fills table bootstrapped_defined_meanings with relevant data
 	 *
-	 * @param dc str The database being accessed.
+	 * @param string $dc The database being accessed.
 	 */
 	protected function bootStrappedDefinedMeanings( $dc ) {
 		// Admin user
@@ -225,7 +225,7 @@ class InstallWikiLexicalData extends Maintenance {
 
 	/** @brief Add some more data to enable annotations
 	 *
-	 * @param dc str The database being accessed.
+	 * @param string $dc The database being accessed.
 	 */
 	protected function enableAnnotations( $dc ) {
 		// Admin user
@@ -267,10 +267,9 @@ class InstallWikiLexicalData extends Maintenance {
 
 	/** @brief Drop Tables
 	 *
-	 * @param dc str The database being accessed.
+	 * @param string $dc The database being accessed.
 	 */
 	protected function dropTables( $dc ) {
-		global $wgDBprefix;
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->delete(
 			'page',
@@ -297,7 +296,7 @@ class InstallWikiLexicalData extends Maintenance {
 
 	/** @brief Displays drop tables commands.
 	 *
-	 * @param dc str The database being accessed.
+	 * @param string $dc The database being accessed.
 	 */
 	protected function printDropTablesCommand( $dc ) {
 		global $wgDBprefix;
@@ -318,9 +317,9 @@ class InstallWikiLexicalData extends Maintenance {
 
 	/** @brief Read, interpret and execute the database template
 	 *
-	 * @param pattern  arr An array of pattern to find.
-	 * @param prefix   arr An array of prefix to replace \a find with.
-	 * @param filename str the database template name.
+	 * @param array $pattern An array of pattern to find.
+	 * @param array $prefix An array of prefix to replace \a find with.
+	 * @param string $filename the database template name.
 	 */
 	protected function ReadTemplateSQLFile( $pattern, $prefix, $filename ) {
 		$dbw = wfGetDB( DB_MASTER );
@@ -343,11 +342,11 @@ class InstallWikiLexicalData extends Maintenance {
 			if ( $sl < 0 ) {
 				continue;
 			}
-			if ( '-' == $line { 0 } && '-' == $line { 1 } ) {
+			if ( '-' == $line [ 0 ] && '-' == $line [ 1 ] ) {
 				continue;
 			}
 
-			if ( ';' == $line { $sl } && ( $sl < 2 || ';' != $line { $sl - 1 } ) ) {
+			if ( ';' == $line [ $sl ] && ( $sl < 2 || ';' != $line [ $sl - 1 ] ) ) {
 				$done = true;
 				$line = substr( $line, 0, $sl );
 			}
@@ -384,7 +383,7 @@ class InstallWikiLexicalData extends Maintenance {
 						. 'Example usage: php install.php --prefix=uw '
 						. '--template=databaseTemplate.sql --datasetname="OmegaWiki community"  --freshInstall' . "\n\n";
 						die;
-					};
+					}
 
 				}
 
@@ -442,7 +441,7 @@ class InstallWikiLexicalData extends Maintenance {
 
 	/** @brief SQLite compatibility
 	 *
-	 * @param string str The string to parse.
+	 * @param string $string The string to parse.
 	 */
 	protected function sqliteLineReplace( $string ) {
 		$string = preg_replace( '/ int(eger|) /i', ' INTEGER ', $string );

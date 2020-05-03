@@ -409,8 +409,6 @@ function addPopupEditors( Editor $editor, array &$columnEditors ) {
  * the corresponding field in the database is meaning_relations
  */
 function getRelationEditor( ViewInformation $viewInformation, UpdateController $controller, $levelDefinedMeaningName, AttributeIDFilter $attributeIDFilter ) {
-	global $wgWldDMValueObjectAttributesEditors;
-
 	$o = OmegaWikiAttributes::getInstance();
 
 	// relationLevel should match one of the levels given in class
@@ -459,8 +457,6 @@ function getRelationEditor( ViewInformation $viewInformation, UpdateController $
 }
 
 function getDefinedMeaningReciprocalRelationsEditor( ViewInformation $viewInformation ) {
-	global $relationsObjectAttributesEditor;
-
 	$o = OmegaWikiAttributes::getInstance();
 
 	$permissionController = new SimplePermissionController( true );
@@ -490,8 +486,6 @@ function getDefinedMeaningReciprocalRelationsEditor( ViewInformation $viewInform
 }
 
 function getTextAttributeValuesEditor( ViewInformation $viewInformation, UpdateController $controller, $levelDefinedMeaningName, AttributeIDFilter $attributeIDFilter ) {
-	global $wgWldTextValueObjectAttributesEditors;
-
 	$o = OmegaWikiAttributes::getInstance();
 
 	$showEditFieldChecker = new ShowEditFieldForAttributeValuesChecker( $levelDefinedMeaningName, "TEXT", $attributeIDFilter );
@@ -540,8 +534,6 @@ function getLinkAttributeValuesEditor( ViewInformation $viewInformation, UpdateC
 }
 
 function getTranslatedTextAttributeValuesEditor( ViewInformation $viewInformation, UpdateController $controller, $levelDefinedMeaningName, AttributeIDFilter $attributeIDFilter ) {
-	global $wgWldTranslatedTextValueObjectAttributesEditors;
-
 	$o = OmegaWikiAttributes::getInstance();
 
 	$showEditFieldChecker = new ShowEditFieldForAttributeValuesChecker( $levelDefinedMeaningName, "TRNS", $attributeIDFilter );
@@ -564,8 +556,6 @@ function getTranslatedTextAttributeValuesEditor( ViewInformation $viewInformatio
 }
 
 function getOptionAttributeValuesEditor( ViewInformation $viewInformation, UpdateController $controller, $levelDefinedMeaningName, AttributeIDFilter $attributeIDFilter ) {
-	global $wgWldOptionValueObjectAttributesEditors;
-
 	$o = OmegaWikiAttributes::getInstance();
 
 	$showEditFieldChecker = new ShowEditFieldForAttributeValuesChecker( $levelDefinedMeaningName, "OPTN", $attributeIDFilter );
@@ -659,7 +649,8 @@ function getExpressionsEditor( $spelling, ViewInformation $viewInformation ) {
 
 /**
  * The corresponding RecordSet function is loadRecord in DefinedMeaningModel.php
- * @param $insideExpression boolean, indicates if the DM Editor is called inside an Expression Editor
+ * @param ViewInformation $viewInformation
+ * @param bool|null $insideExpression indicates if the DM Editor is called inside an Expression Editor
  */
 function getDefinedMeaningEditor( ViewInformation $viewInformation, $insideExpression = null ) {
 	global $wdDefinedMeaningAttributesOrder, $wgUser;

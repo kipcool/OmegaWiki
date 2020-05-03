@@ -2,12 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Meursault2004",
-			"Pras",
-			"NoiX180"
+			"NoiX180",
+			"Pras"
 		]
 	},
-	"wikidata-handler-namespace-move-error": "Kaca ing mandala aran kang diopèni èstènsi WikiLexicalData ora bisa ingalihan.",
-	"wikidata-handler-namespace-move-to-error": "Ora ana kaca kang bisa ingalihan menyang mandala aran kang diopèni èstènsi WikiLexicalData.",
+	"wikidata-handler-namespace-move-error": "Kaca ing mandhala aran kang diopèni èstènsi WikiLexicalData ora bisa ingalihan.",
+	"wikidata-handler-namespace-move-to-error": "Ora ana kaca kang bisa ingalihan menyang mandhala aran kang diopèni èstènsi WikiLexicalData.",
 	"languages": "Pangurus basa",
 	"langman-desc": "Tambah lan owahi setèlan basa sarana [[Special:Languages]]",
 	"langman_title": "Pangurus basa",
@@ -119,7 +119,7 @@
 	"ow_ID": "ID",
 	"ow_Language": "Basa",
 	"ow_LinkAttributeHeader": "Atribut pranala",
-	"ow_Multiple_meanings": "Wedharané \"$1\"",
+	"ow_Multiple_meanings": "Wedharaning \"$1\"",
 	"ow_NewExactMeaning": "Werdi anyar sing titis",
 	"ow_OptionAttribute": "Properti",
 	"ow_OptionAttributeHeader": "Atribut opsi",

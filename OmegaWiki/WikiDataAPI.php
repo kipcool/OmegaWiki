@@ -1,24 +1,22 @@
 <?php
 /** @file
- *  @brief This a part of the WiKiLexicalData's PHP API
+ * @brief This a part of the WiKiLexicalData's PHP API
  */
 require_once 'Expression.php';
 require_once 'Transaction.php';
 require_once 'WikiDataGlobals.php';
 
 /** @brief non specific entity class that access the database directly
- *
  */
 class OmegaWikiDataBase {
 
-/**
- * returns the value of column if exist
- * null if not found
- * @param table  table name
- * @param column column nane
- * @param value  column value
- * @param isDc   if has DataSet Context(boolean)
- */
+	/**
+	 * @param string $table table name
+	 * @param string $column column name
+	 * @param mixed $value
+	 * @param int $isDc if has DataSet Context
+	 * @return mixed|null value of column, or null if not found
+	 */
 	public static function verifyColumn( $table, $column, $value, $isDc ) {
 		if ( $isDc == 1 ) {
 			$dc = wdGetDataSetContext() . '_';
@@ -45,13 +43,13 @@ class OmegaWikiDataBase {
 
 /** @brief returns an expression ( spelling/word )
  *
- * @param expressionId req'd int The expression id.
- * @param dc           opt'l str The database being accessed.
+ * @param int $expressionId req'd The expression id.
+ * @param string|null $dc opt'l The database being accessed.
  *
  * @return null if not exists
  */
 function getExpression( $expressionId, $dc = null ) {
-	if ( is_null( $dc ) ) {
+	if ( $dc === null ) {
 		$dc = wdGetDataSetContext();
 	}
 	$dbr = wfGetDB( DB_REPLICA );
@@ -72,12 +70,12 @@ function getExpression( $expressionId, $dc = null ) {
 
 /** @brief Creates a new object id for the Object table
  *
- * @param table req'd str The name of the new object's table.
- * @param dc    opt'l str The database being accessed.
+ * @param string $table req'd The name of the new object's table.
+ * @param string|null $dc opt'l The database being accessed.
  */
 function newObjectId( $table, $dc = null ) {
 	global $wgDBprefix;
-	if ( is_null( $dc ) ) {
+	if ( $dc === null ) {
 		$dc = wdGetDataSetContext();
 	}
 
@@ -142,7 +140,7 @@ function getRemovedExpressionId( $spelling, $languageId ) {
 }
 
 function getExpressionIdFromSyntrans( $syntransId, $dc = null ) {
-	if ( is_null( $dc ) ) {
+	if ( $dc === null ) {
 		$dc = wdGetDataSetContext();
 	}
 	$dbr = wfGetDB( DB_REPLICA );
@@ -268,7 +266,7 @@ function existSpelling( $spelling, $languageId = 0 ) {
  */
 function findExpression( $spelling, $languageId ) {
 	$expressionId = getExpressionId( $spelling, $languageId );
-	if ( !is_null( $expressionId ) ) {
+	if ( $expressionId !== null ) {
 		return new Expression( $expressionId, $spelling, $languageId );
 	}
 	return null;
@@ -283,7 +281,7 @@ function findExpression( $spelling, $languageId ) {
  */
 function findRemovedExpression( $spelling, $languageId ) {
 	$expressionId = getRemovedExpressionId( $spelling, $languageId );
-	if ( !is_null( $expressionId ) ) {
+	if ( $expressionId !== null ) {
 		reviveExpression( $expressionId );
 		createPage( NS_EXPRESSION, $spelling );
 		return new Expression( $expressionId, $spelling, $languageId );
@@ -303,12 +301,12 @@ function createExpression( $spelling, $languageId, $options = [] ) {
 
 function findOrCreateExpression( $spelling, $languageId, $options = [] ) {
 	$expression = findExpression( $spelling, $languageId );
-	if ( !is_null( $expression ) ) {
+	if ( $expression !== null ) {
 		return $expression;
 	}
 	// else
 	$expression = findRemovedExpression( $spelling, $languageId );
-	if ( !is_null( $expression ) ) {
+	if ( $expression !== null ) {
 		return $expression;
 	}
 	// else
@@ -483,10 +481,10 @@ function removeRelationWithId( $relationId ) {
  * left hand side, you'll get all relations that exist in which the dm you did specify
  * is involved.
  *
- * @param unknown_type|null $relationTypeId dmid of the relationtype, optional.
- * @param unknown_type|null $lhs dmid of the left hand side, optional.
- * @param unknown_type|null $dmId dmid of the right hand side, optional.
- * @param unknown_type|null $dc the dataset, optional
+ * @param int|null $relationTypeId dmid of the relationtype, optional.
+ * @param int|null $lhs dmid of the left hand side, optional.
+ * @param int|null $rhs dmid of the right hand side, optional.
+ * @param int|null $dc the dataset, optional
  */
 function getRelationDefinedMeanings( $relationTypeId = null, $lhs = null, $rhs = null, $dc = null ) {
 	$dc = wdGetDataSetContext( $dc );
@@ -881,10 +879,10 @@ function createTranslatedContent( $translatedContentId, $languageId, $textId ) {
 }
 
 function translatedTextExists( $textId, $languageId ) {
-	if ( is_null( $textId ) ) {
+	if ( $textId === null ) {
 		throw new Exception( "translatedTextExists - textId is null" );
 	}
-	if ( is_null( $languageId ) ) {
+	if ( $languageId === null ) {
 		throw new Exception( "translatedTextExists - languageId is null" );
 	}
 	$dc = wdGetDataSetContext();
@@ -1686,7 +1684,7 @@ function getDefinedMeaningSpellingForAnyLanguage( $definedMeaning ) {
 /**
  * Returns the language id of a definedMeaning in any language
  * according to which definition comes up first in the SQL query
- * @param definedMeaning str the defined meaning id
+ * @param string $definedMeaning the defined meaning id
  */
 function getDefinedMeaningSpellingLanguageId( $definedMeaning ) {
 	$dc = wdGetDataSetContext();
@@ -1739,12 +1737,12 @@ function getLanguageIdForDefinedMeaningAndExpression( $definedMeaningId, $spelli
 
 /**
  * Returns the definition of a definedMeaning in a given language
- * @param $definedMeaningId
- * @param $languageId
- * @param $dc
+ * @param int $definedMeaningId
+ * @param int $languageId
+ * @param int|null $dc
  */
 function getDefinedMeaningDefinitionForLanguage( $definedMeaningId, $languageId, $dc = null ) {
-	if ( is_null( $dc ) ) {
+	if ( $dc === null ) {
 		$dc = wdGetDataSetContext();
 	}
 	$dbr = wfGetDB( DB_REPLICA );
@@ -1775,7 +1773,7 @@ function getDefinedMeaningDefinitionForLanguage( $definedMeaningId, $languageId,
 /**
  * Returns the definition of a definedMeaning in any language
  * according to which definition comes up first in the SQL query
- * @param $definedMeaningId
+ * @param int $definedMeaningId
  */
 function getDefinedMeaningDefinitionForAnyLanguage( $definedMeaningId ) {
 	$dc = wdGetDataSetContext();
@@ -1806,7 +1804,7 @@ function getDefinedMeaningDefinitionForAnyLanguage( $definedMeaningId ) {
 /**
  * Returns the definition of a definedMeaning in the user language, or in English, or in any other
  * according to what is available
- * @param $definedMeaningId
+ * @param int $definedMeaningId
  */
 function getDefinedMeaningDefinition( $definedMeaningId ) {
 	require_once 'OmegaWikiDatabaseAPI.php';
@@ -1930,7 +1928,7 @@ function checkLanguageCode( $languageCode ) {
  * null if not found
  */
 function getSpellingForLanguageId( $definedMeaningId, $userLanguageId, $fallbackLanguageId = WLD_ENGLISH_LANG_ID, $dc = null, $options = [] ) {
-	if ( is_null( $dc ) ) {
+	if ( $dc === null ) {
 		$dc = wdGetDataSetContext( $dc );
 	}
 	$dbr = wfGetDB( DB_REPLICA );
@@ -2062,8 +2060,8 @@ function getCollectionContents( $collectionId ) {
  * Returns an array containing the ids of the defined meanings belonging to the collection
  * with the given id.
  *
- * @param unknown_type $collectionId
- * @param unknown_type|null $dc
+ * @param int $collectionId
+ * @param int|null $dc
  */
 function getCollectionMembers( $collectionId, $dc = null ) {
 	$memberMids = [];
@@ -2140,7 +2138,7 @@ function getExpressionMeaningIdsForLanguages( $spelling, $languageIds, $dc = nul
 /** Get Defined Meaning Ids from Expression Id
  */
 function getExpressionIdMeaningIds( $expressionId, $dc = null ) {
-	if ( is_null( $dc ) ) {
+	if ( $dc === null ) {
 		$dc = wdGetDataSetContext();
 	}
 	$dbr = wfGetDB( DB_REPLICA );
@@ -2171,11 +2169,10 @@ function getExpressionIdMeaningIds( $expressionId, $dc = null ) {
 /** Write a concept mapping to db
  * supply mapping as a valid
  * array("dataset_prefix"=>defined_meaning_id,...)
- * @return assoc array of uuids used for mapping. (typically you can just
+ * @return (string|int)[] Assoc array of uuids used for mapping. (typically you can just
  *           discard this, but it is used in copy.php for objects table support
  * 	     array values set to -1 were not mapped.
  */
-
 function createConceptMapping( $concepts, $override_transaction = null ) {
 	$uuid_map = getUUID( $concepts );
 	foreach ( $concepts as $dc => $dm_id ) {
@@ -2187,6 +2184,12 @@ function createConceptMapping( $concepts, $override_transaction = null ) {
 	return $uuid_map;
 }
 
+/**
+ * @param string $dc
+ * @param int $collid
+ * @param int $dm_id
+ * @return string|int -1 if not found
+ */
 function getMapping( $dc, $collid, $dm_id ) {
 	$dbr = wfGetDB( DB_REPLICA );
 
@@ -2206,6 +2209,9 @@ function getMapping( $dc, $collid, $dm_id ) {
 }
 
 /** ask db to provide a universally unique id
+ *
+ * @param int[] $concepts
+ * @return (string|int)[] -1 if not found
  */
 function getUUID( $concepts ) {
 	$dbr = wfGetDB( DB_REPLICA );
@@ -2234,7 +2240,6 @@ function getUUID( $concepts ) {
 }
 
 /** this function assumes that there is only a single mapping collection */
-
 function getCollectionIdForDC( $dc ) {
 	$dbr = wfGetDB( DB_REPLICA );
 
@@ -2254,7 +2259,6 @@ function getCollectionIdForDC( $dc ) {
 }
 
 /** Write the dm to the correct collection for a particular dc */
-
 function writeDmToCollection( $dc, $collid, $uuid, $dm_id, $override_transaction = null ) {
 	global $wgUser, $wgRequest;
 	// if(is_null($dc)) {
@@ -2263,7 +2267,7 @@ function writeDmToCollection( $dc, $collid, $uuid, $dm_id, $override_transaction
 	$dbw = wfGetDB( DB_MASTER );
 
 	$add_transaction_id = $override_transaction;
-	if ( is_null( $add_transaction_id ) ) {
+	if ( $add_transaction_id === null ) {
 		startNewTransaction( $wgUser->getId(), $wgRequest->getIP(), "inserting collection $collid", $dc );
 		$add_transaction_id = getUpdateTransactionId();
 	}
@@ -2317,7 +2321,7 @@ function &readConceptMapping( $concept_id ) {
 }
 
 function getConceptId( $dm, $dc ) {
-	if ( is_null( $dc ) ) {
+	if ( $dc === null ) {
 		$dc = wdGetDataSetContext();
 	}
 	$collection_id = getCollectionIdForDC( $dc );
@@ -2367,7 +2371,7 @@ function &getDefinedMeaningDataAssociatedByConcept( $dm, $dc ) {
 }
 
 function definingExpressionRow( $definedMeaningId, $dc = null ) {
-	if ( is_null( $dc ) ) {
+	if ( $dc === null ) {
 		$dc = wdGetDataSetContext();
 	}
 	$dbr = wfGetDB( DB_REPLICA );
@@ -2446,7 +2450,7 @@ function getTextValue( $textId ) {
  * that correspond to the same $spelling (max 1 per language)
  */
 function getExpressions( $spelling, $dc = null ) {
-	if ( is_null( $dc ) ) {
+	if ( $dc === null ) {
 		$dc = wdGetDataSetContext();
 	}
 	$dbr = wfGetDB( DB_REPLICA );
@@ -2506,7 +2510,6 @@ class ClassAttributes {
 		$dc = wdGetDataSetContext();
 		$dbr = wfGetDB( DB_REPLICA );
 
-		global $wgDefaultClassMids, $wgWikidataDataSet;
 		$queryResult = $dbr->select(
 			[ 'ca' => "{$dc}_class_attributes", 'bdm' => "{$dc}_bootstrapped_defined_meanings" ],
 			[ 'DISTINCT ca.attribute_mid', 'ca.attribute_type', 'bdm.name' ],
@@ -2659,7 +2662,6 @@ function getDefinedMeaningIdFromExpressionIdAndLanguageId( $expressionId, $langu
  *	This class is a collection of functions to retrieve information from
  *	the collection table.
  */
-
 class Collections {
 
 	/** returns the concept's (Defined Meaning ) Expression of a Collection in a language
@@ -2718,8 +2720,8 @@ class WLD_Class {
 
 	/** Get a list of Class Expressions where the Defined Meaning Id is a member of.
 	 *
-	 * @param $definedMeaningId
-	 * @param $languageId
+	 * @param int $definedMeaningId
+	 * @param int $languageId
 	 *
 	 * @return list of array expressions
 	 * @return array() when none

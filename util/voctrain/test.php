@@ -43,6 +43,7 @@ function main() {
 	$loadex->setFetcher( $fetcher );
 	dumpExercise( $loadex, 10 );
 }
+
 function dumpExercise( $exercise, $questions ) {
 	for ( $i = 0; $i < $questions; $i++ ) {
 		$question = $exercise->nextQuestion();
@@ -66,8 +67,6 @@ function dumpExercise( $exercise, $questions ) {
 # }
 #
 # }
-
-
 
 /** gets array of dmids from DOMDocument
  * now dupped in Exercise... can we drop it?

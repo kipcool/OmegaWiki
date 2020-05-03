@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mehtab ahmed",
 			"Aursani",
+			"Mehtab ahmed",
 			"Tweety"
 		]
 	},
@@ -10,6 +10,7 @@
 	"ow_transaction_previous_version": "پويون ورزن",
 	"ow_TextAttributeValues": "سادا اکر",
 	"ow_TranslatedText": "ترجمايل متن",
+	"ow_removed": "ھٽايو",
 	"ow_class_attr_type_plain": "سادا اکر",
 	"ow_suggest_previous": "پويون",
 	"ow_suggest_next": "اڳيون",

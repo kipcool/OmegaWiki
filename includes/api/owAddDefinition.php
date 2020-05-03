@@ -18,10 +18,10 @@ class AddDefinition extends ApiBase {
 	}
 
 	public function execute() {
-		global $wgUser, $wgOut;
+		$user = $this->getUser();
 
 		// keep blocked user out
-		if ( $wgUser->isBlocked() ) {
+		if ( $user->isBlocked() ) {
 			$this->dieUsage( 'your account is blocked.', 'blocked' );
 		}
 
@@ -39,7 +39,7 @@ class AddDefinition extends ApiBase {
 		}
 
 		// limit non-test access to bots
-		if ( !( $this->test or $wgUser->isAllowed( 'bot' ) ) ) {
+		if ( !( $this->test or $user->isAllowed( 'bot' ) ) ) {
 			$this->dieUsage( 'you must have a bot flag to use this API function', 'bot_only' );
 		}
 
@@ -120,8 +120,6 @@ class AddDefinition extends ApiBase {
 	}
 
 	public function processBatch( $wikiPage ) {
-		global $params;
-
 		$csvWikiPageTitle = Title::newFromText( $wikiPage );
 		$csvWikiPage = new WikiPage( $csvWikiPageTitle );
 
@@ -210,7 +208,6 @@ class AddDefinition extends ApiBase {
 	}
 
 	public function owAddDefinition( $definition, $languageId, $definedMeaningId ) {
-		global $wgUser;
 		$dc = wdGetDataSetContext();
 
 		// check that the language_id exists

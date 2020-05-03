@@ -16,11 +16,12 @@ class SpecialAddCollection extends SpecialPage {
 	}
 
 	function execute( $par ) {
-		global $wgOut, $wgUser, $wgRequest;
+		global $wgOut, $wgRequest;
 
 		$wgOut->setPageTitle( 'Add Collection' );
 
-		if ( !$wgUser->isAllowed( 'addcollection' ) ) {
+		$user = $this->getUser();
+		if ( !$user->isAllowed( 'addcollection' ) ) {
 			$wgOut->addHTML( 'You do not have permission to add a collection.' );
 			return false;
 		}
@@ -33,7 +34,7 @@ class SpecialAddCollection extends SpecialPage {
 
 			$dc = $wgRequest->getText( 'dataset' );
 			$collectionName = $wgRequest->getText( 'collection' );
-			startNewTransaction( $wgUser->getID(), $wgRequest->getIP(), 'Add collection ' . $collectionName );
+			startNewTransaction( $user->getID(), $wgRequest->getIP(), 'Add collection ' . $collectionName );
 			bootstrapCollection( $collectionName, $wgRequest->getText( 'language' ), $wgRequest->getText( 'type' ), $dc );
 			$wgOut->addHTML( wfMessage( 'ow_collection_added', $collectionName )->text() . "<br />" );
 		}

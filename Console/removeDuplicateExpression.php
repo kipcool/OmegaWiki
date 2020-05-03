@@ -1,8 +1,8 @@
 <?php
 
 /**
-* Maintenance script to remove duplicate expessions
-*/
+ * Maintenance script to remove duplicate expessions
+ */
 
 $baseDir = __DIR__ . '/../../..';
 require_once $baseDir . '/maintenance/Maintenance.php';
@@ -14,16 +14,14 @@ class RemoveDuplicateExpressions extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
-		$this->mDescription = "Maintenance tool to remove duplicated expressions\n"
+		$this->addDescription( "Maintenance tool to remove duplicated expressions\n"
 			. 'Example usage: php removeDuplicateExpression.php --test=true ' . "\n"
 			. ' or simply' . "\n"
-			. 'php removeDuplicateExpression.php' . "\n";
+			. 'php removeDuplicateExpression.php' . "\n" );
 		$this->addOption( 'test', 'true for test mode. e.g. --test=true' );
 	}
 
 	public function execute() {
-		global $wdCurrentContext;
-
 		$this->test = false;
 		if ( $this->hasOption( 'test' ) ) {
 			$this->test = true;
@@ -91,7 +89,7 @@ class RemoveDuplicateExpressions extends Maintenance {
 	}
 
 	protected function deleteDuplicate( $expressionId, $languageId, $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -131,7 +129,7 @@ class RemoveDuplicateExpressions extends Maintenance {
 	}
 
 	protected function correctDuplication( $syntransSid, $expressionId, $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -154,7 +152,7 @@ class RemoveDuplicateExpressions extends Maintenance {
 	}
 
 	protected function getSyntransToUpdate( $expressionIds, $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -186,7 +184,7 @@ class RemoveDuplicateExpressions extends Maintenance {
 	}
 
 	protected function getSpellingExpressionId( $spelling, $languageId, $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -218,7 +216,7 @@ class RemoveDuplicateExpressions extends Maintenance {
 	}
 
 	protected function getDuplicateExpressions( $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );

@@ -22,7 +22,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  */
-
 class ApiWikiData extends ApiBase {
 
 	private $printer;
@@ -286,7 +285,7 @@ class ApiWikiData extends ApiBase {
 	}
 
 	public function & getCustomPrinter() {
-		if ( is_null( $this->printer ) ) {
+		if ( $this->printer === null ) {
 			$this->printer = new ApiWikiDataFormatXml( $this->getMain() );
 		}
 		return $this->printer;

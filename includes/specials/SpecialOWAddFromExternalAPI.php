@@ -57,16 +57,15 @@ class SpecialOWAddFromExternalAPI extends SpecialPage {
 	}
 
 	/** @brief This is the save function that handles adding Synonyms.
-	 *
 	 */
 	private function saveSynonym() {
-		$definedMeaningId = array_key_exists( 'dm-id', $_POST )	? $_POST['dm-id'] : '';
-		$languageId = array_key_exists( 'lang-id', $_POST )	? $_POST['lang-id'] : '';
-		$spelling = array_key_exists( 'e', $_POST )	? $_POST['e'] : '';
-		$identicalMeaning = array_key_exists( 'im', $_POST ) ? $_POST['im'] : 1;
-		$transactionId = array_key_exists( 'tid', $_POST ) ? $_POST['tid'] : '';
-		$transacted = array_key_exists( 'transacted', $_POST )	? $_POST['transacted'] : false;
-		$source = array_key_exists( 'src', $_POST )	? $_POST['src'] : '';
+		$definedMeaningId = $_POST['dm-id'] ?? '';
+		$languageId = $_POST['lang-id'] ?? '';
+		$spelling = $_POST['e'] ?? '';
+		$identicalMeaning = $_POST['im'] ?? 1;
+		$transactionId = $_POST['tid'] ?? '';
+		$transacted = $_POST['transacted'] ?? false;
+		$source = $_POST['src'] ?? '';
 
 		// @todo create checks for correctness
 		if ( $identicalMeaning === true ) {
@@ -97,7 +96,7 @@ class SpecialOWAddFromExternalAPI extends SpecialPage {
 	}
 
 	private function process() {
-		global $myWordnikAPIKey, $wgWldProcessExternalAPIClasses, $wgOut;
+		global $wgWldProcessExternalAPIClasses;
 
 		// limit access to wikidata editors
 		if ( !$this->getUser()->isAllowed( 'editwikidata-uw' ) ) {
@@ -109,10 +108,10 @@ class SpecialOWAddFromExternalAPI extends SpecialPage {
 			$this->dieUsage( 'your account is blocked.', 'blocked' );
 		}
 
-		$sourceLanguageId	= array_key_exists( 'from-lang', $_GET ) ? $_GET['from-lang'] : '';
-		$source				= array_key_exists( 'api', $_GET )	? $_GET['api'] : '';
-		$search				= array_key_exists( 'search-ext', $_GET ) ? $_GET['search-ext'] : '';
-		$collectionId		= array_key_exists( 'collection', $_GET ) ? $_GET['collection'] : '';
+		$sourceLanguageId = $_GET['from-lang'] ?? '';
+		$source = $_GET['api'] ?? '';
+		$search = $_GET['search-ext'] ?? '';
+		$collectionId = $_GET['collection'] ?? '';
 
 		switch ( $source ) {
 			case 'Wordnik':
@@ -150,7 +149,7 @@ class SpecialOWAddFromExternalAPI extends SpecialPage {
 	 * separates the save from the process functions
 	 */
 	function execute( $par ) {
-		$this->saveType = array_key_exists( 'save-data', $_POST ) ? $_POST['save-data'] : '';
+		$this->saveType = $_POST['save-data'] ?? '';
 		if ( $this->saveType ) {
 			$this->save();
 		} else {
@@ -173,7 +172,6 @@ class SpecialOWAddFromExternalAPI extends SpecialPage {
  *
  * @note: To extend this class, the extended class needs its own __construct, execute,
  *	checkExternalDefinition, setExternalDefinition functions.
- *
  */
 class ExternalResources {
 
@@ -190,12 +188,11 @@ class ExternalResources {
 	protected $owlExists = false;			// bool
 
 	/**
-	 * @param spTitle          str Special Page Title
-	 * @param source           str the source dictionary
-	 * @param sourceLabel      str the source dictionary name that will appear.
-	 * @param sourceLanguageId int The languageId of the source dictionary
-	 * @param search           str The expression/spelling( word ) to be searched
-	 * @param collectionId     int The Collection Id
+	 * @param string $spTitle Special Page Title
+	 * @param string $source the source dictionary
+	 * @param int $sourceLanguageId The languageId of the source dictionary
+	 * @param string $search The expression/spelling( word ) to be searched
+	 * @param int $collectionId The Collection Id
 	 */
 	function __construct( $spTitle, $source, $sourceLanguageId, $search, $collectionId ) {
 		global $wgOut;
@@ -273,8 +270,6 @@ class ExternalResources {
 		) );
 	}
 
-	/**
-	 */
 	function checkConnectionStatus() {
 		$this->connection = false;
 		if ( connection_status() === CONNECTION_NORMAL ) {
@@ -325,7 +320,53 @@ class ExternalResources {
 
 		$this->owlLexicalDataJSON = json_encode( $this->owlLexicalData );
 		// Line below for testing. When there's no internet connection
-	// $this->owlLexicalDataJSON = '[{"processed":null,"dm_id":"5836","lang_id":"85","text":"A common, four-legged animal (Sus scrofa) that has cloven hooves, bristles and a nose adapted for digging and is farmed by humans for its meat.","syn":null},{"processed":null,"dm_id":"1499810","lang_id":"85","text":"(Pejorative) A fat or overweight person.","syn":[["butterball","85","1","1499814"],["chubster","85","1","1499816"],["chunker","85","1","1499818"],["fat-ass","85","1","1499825"],["fatass","85","1","1499827"],["fatfuck","85","1","1499820"],["fatshit","85","1","1499829"],["fatso","85","1","1499811"],["fattie","85","1","1499822"],["fatty","85","1","1499823"],["lardass","85","1","1499831"],["lardo","85","1","1499833"],["obeast","85","1","1499837"],["oinker","85","1","1499835"],["podge","85","1","1499840"],["porker","85","1","1499842"],["pudge","85","1","1499844"],["salad dodger","85","1","1499846"],["tub of lard","85","1","1499848"]]},{"processed":null,"dm_id":"583600","lang_id":"85","text":"A common, four-legged animal (Sus scrofa) that has cloven hooves, bristles and a nose adapted for digging and is farmed by humans for its meat.","syn":null}]';
+/*
+		$this->owlLexicalDataJSON = <<<JSON
+[
+	{
+		"processed":null,
+		"dm_id":"5836",
+		"lang_id":"85",
+		"text":"A common, four-legged animal (Sus scrofa) that has cloven hooves, bristles and a nose adapted for digging and is farmed by humans for its meat.",
+		"syn":null
+	},
+	{
+		"processed":null,
+		"dm_id":"1499810",
+		"lang_id":"85",
+		"text":"(Pejorative) A fat or overweight person.",
+		"syn":[
+			["butterball","85","1","1499814"],
+			["chubster","85","1","1499816"],
+			["chunker","85","1","1499818"],
+			["fat-ass","85","1","1499825"],
+			["fatass","85","1","1499827"],
+			["fatfuck","85","1","1499820"],
+			["fatshit","85","1","1499829"],
+			["fatso","85","1","1499811"],
+			["fattie","85","1","1499822"],
+			["fatty","85","1","1499823"],
+			["lardass","85","1","1499831"],
+			["lardo","85","1","1499833"],
+			["obeast","85","1","1499837"],
+			["oinker","85","1","1499835"],
+			["podge","85","1","1499840"],
+			["porker","85","1","1499842"],
+			["pudge","85","1","1499844"],
+			["salad dodger","85","1","1499846"],
+			["tub of lard","85","1","1499848"]
+		]
+	},
+	{
+		"processed":null,
+		"dm_id":"583600",
+		"lang_id":"85",
+		"text":"A common, four-legged animal (Sus scrofa) that has cloven hooves, bristles and a nose adapted for digging and is farmed by humans for its meat.",
+		"syn":null
+	}
+]
+JSON;
+*/
 
 		$this->wgOut->addHTML(
 			'<div id="owl-data">' . $this->owlLexicalDataJSON . '</div>'

@@ -2,8 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Helix84",
-			"Teslaton",
-			"Sudo77(new)"
+			"Luky001",
+			"Sudo77(new)",
+			"Teslaton"
 		]
 	},
 	"wikidata-desc": "Pridáva databázu v štýle wiki pre rozličné druhy obsahu",
@@ -36,8 +37,8 @@
 	"datasearch_within_ext_ids": "V rámci externých identifikátorov:",
 	"datasearch_showing_only": "Zobrazuje sa iba maximálny počet $1 {{PLURAL:$1|výsledok|výsledky|výsledkov}} (z celkom $2).",
 	"datasearch_match_ext_ids": "Externé identifikátory vyhovujúce <em>$1</em>",
-	"datasearch_match_words": "Slová vyhovujúce <em>$1</em> a príslušné významy",
-	"datasearch_match_words_lang": "Slová v <em>$1</em> vyhovujúce <em>$2</em> a príslušné významy",
+	"datasearch_match_words": "Výrazy zodpovedajúce <em>$1</em> a ich príslušné významy",
+	"datasearch_match_words_lang": "Výrazy v <em>$1</em> zodpovedajúce <em>$2</em> a ich príslušné významy",
 	"importtsv": "Importovať TSV",
 	"ow_importtsv_title1": "Importovať TSV",
 	"ow_importtsv_title2": "Importovať definície a preklady",
@@ -181,7 +182,7 @@
 	"ow_please_proved_dmid": "Zdá sa, že vo vašom vstupe chýba „?dmid=<ID>“ (dmid=ID Definovaného významu)<br />Prosím kontaktujte správcu servera.",
 	"ow_please_proved_dc1": "Zdá sa, že ste zabudli zadať „?dc1=<niečo>“ (dcl=kontext množiny dát 1, z ktorej sa kopíruje)<br />Prosím, kontaktujte správcu servera.",
 	"ow_please_proved_dc2": "Zdá sa že ste zabudli zadať „?dc2=<niečo>“ (dcl=kontext množiny dát 2, do ktorej sa kopíruje)<br />Prosím kontaktujte správcu servera.",
-	"ow_copy_successful": "<h2>Kopírovanie prebehlo úspešne</h2>Zdá sa, že vaše dáta boli skopírované úspešne. Nezabudnite to pre istotu ešte raz skontrolovať!",
+	"ow_copy_successful": "<h2>Kopírovanie prebehlo úspešne</h2>\nZdá sa, že vaše dáta boli skopírované.\nNezabudnite to pre istotu ešte raz skontrolovať!",
 	"ow_copy_unsuccessful": "<h3>Kopírovanie neúspešné</h3> Operácia kopírovania sa neuskutočnila.",
 	"ow_no_action_specified": "<h3>Nebola uvedená činnosť</h3> Možno ste sa snažili na túto stránku pristupovať priamo. Bežne sa sem nemáte dostať.",
 	"ow_db_consistency_not_found": "<h2>Chyba</h2>Nastal problém s konzistenciou databázy. Wikidata nemôže nájsť platné údaje spojené s týmto ID Definovaného významu. Je možné, že sú stratené. Prosím kontaktujte správcu servera.",
@@ -208,5 +209,5 @@
 	"ow_nstab_edit_copy": "upraviť kópiu",
 	"right-addlanguage": "Pridať a zmeniť jazykové nastavenia pomocou",
 	"ow_shown_datasets": "Zobrazené množiny dát",
-	"ow_statistics": "Wikidata: Štatistiky"
+	"ow_statistics": "Štatistiky lexikálnych dát"
 }

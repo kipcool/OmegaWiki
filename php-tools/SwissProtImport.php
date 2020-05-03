@@ -12,7 +12,7 @@ function startsWith( $string, $substring ) {
 	return substr( $string, 0, strlen( $substring ) ) == $substring;
 }
 
-/*
+/**
  * Import Swiss-Prot from the XML file. Be sure to have started a transaction first!
  */
 function importSwissProt( $xmlFileName, $umlsCollectionId = 0, $goCollectionId = 0, $hugoCollectionId = 0, $EC2GoMapping = [], $keyword2GoMapping = [] ) {

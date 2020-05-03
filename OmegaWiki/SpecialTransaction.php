@@ -1188,10 +1188,10 @@ function simpleRecord( $structure, $values ) {
 
 function rollBackTransactions( $recordSet ) {
 	$o = OmegaWikiAttributes::getInstance();
-	global $wgRequest, $wgUser;
+	global $wgRequest;
 
 	$summary = $wgRequest->getText( 'summary' );
-	startNewTransaction( $wgUser->getID(), $wgRequest->getIP(), $summary );
+	startNewTransaction( $this->getUser()->getID(), $wgRequest->getIP(), $summary );
 
 	$idStack = new IdStack( 'transaction' );
 	$transactionKeyStructure = $recordSet->getKey();

@@ -101,7 +101,6 @@ function definedMeaningReferenceAsLink( $definedMeaningId, $definingExpression, 
 }
 
 function languageIdAsText( $languageId ) {
-	global $wgUser;
 	$owLanguageNames = getOwLanguageNames();
 	if ( array_key_exists( $languageId, $owLanguageNames ) ) {
 		return $owLanguageNames[$languageId];

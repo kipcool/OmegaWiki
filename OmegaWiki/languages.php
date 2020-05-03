@@ -13,7 +13,7 @@ class WLDLanguage {
 	}
 
 	/** @brief returns the languageId
-	 * @param options req'd arr
+	 * @param array $options req'd
 	 * 	- options:
 	 * 		- sid   str return the language Id using the syntrans id
 	 * 		- wmkey str return the language Id for the wikimedia key
@@ -72,7 +72,7 @@ class WLDLanguage {
 	}
 
 	/**
-	 * @param iso639_3 int OmegaWiki's improvised iso
+	 * @param int $iso639_3 OmegaWiki's improvised iso
 	 * @return the wikimedia code corresponding to the iso639_3 $code
 	 * @see use OwDatabaseAPI::getLanguageCodeForIso639_3 instead
 	 */
@@ -95,9 +95,10 @@ class WLDLanguage {
 
 	/**
 	 * Returns the SQL parameters needed for fetching language names in a given language.
-	 * @param $langCode the language in which to retrieve the language names
-	 * @param $lang_subset an array in the form ( 85, 89, ...) that restricts the language_id that are returned
+	 * @param string $langCode the language in which to retrieve the language names
+	 * @param int[] $lang_subset an array in the form ( 85, 89, ...) that restricts the language_id that are returned
 	 * this array can be generated with ViewInformation->getFilterLanguageList() according to user preferences
+	 * @return array
 	 */
 	static function getParametersForNames( $langCode, $lang_subset = [] ) {
 		/* Use a simpler query if the user's language is English. */
@@ -105,7 +106,7 @@ class WLDLanguage {
 		$dbr = wfGetDB( DB_REPLICA );
 		$langId = getLanguageIdForCode( $langCode );
 
-		if ( $langCode == WLD_ENGLISH_LANG_WMKEY || is_null( $langId ) ) {
+		if ( $langCode == WLD_ENGLISH_LANG_WMKEY || $langId === null ) {
 			$cond = [ 'name_language_id' => WLD_ENGLISH_LANG_ID ];
 			if ( !empty( $lang_subset ) ) {
 				$cond['language_id'] = $lang_subset;
@@ -141,7 +142,7 @@ class WLDLanguage {
 }
 
 /**
- * @param $purge purge cache
+ * @param bool $purge purge cache
  * @return array of language names for the user's language preference
  * @todo for deprecation, use OwDatabaseAPI::getOwLanguageNames instead
  */
@@ -162,7 +163,7 @@ function getLangNames( $code ) {
 
 function getLanguageIdForCode( $code ) {
 	static $languages = null;
-	if ( is_null( $languages ) ) {
+	if ( $languages === null ) {
 		$dbr = wfGetDB( DB_REPLICA );
 		$id_res = $dbr->select(
 			'language',
@@ -182,11 +183,13 @@ function getLanguageIdForCode( $code ) {
 /**
  * returns the language_id corresponding to the
  * iso639_3 $code
+ *
+ * @return int
  */
 function getLanguageIdForIso639_3( $code ) {
 	static $languages = null;
 
-	if ( is_null( $languages ) ) {
+	if ( $languages === null ) {
 		$dbr = wfGetDB( DB_REPLICA );
 		$result = $dbr->select(
 			'language',
@@ -211,7 +214,7 @@ function getLanguageIdForIso639_3( $code ) {
 function getLanguageIso639_3ForId( $id ) {
 	static $languages = null;
 
-	if ( is_null( $languages ) ) {
+	if ( $languages === null ) {
 		$dbr = wfGetDB( DB_REPLICA );
 		$result = $dbr->select(
 			'language',
@@ -259,8 +262,8 @@ function getDMIdForIso639_3( $code ) {
 
 /* @return Return an array containing all language names translated into the language
  * Returns a SQL query string for fetching language names in a given language.
- * @param $lang_code the language in which to retrieve the language names
- * @param $lang_subset an array in the form ( 85, 89, ...) that restricts the language_id that are returned
+ * @param string $lang_code the language in which to retrieve the language names
+ * @param int[] $lang_subset an array in the form ( 85, 89, ...) that restricts the language_id that are returned
  * this array can be generated with ViewInformation->getFilterLanguageList() according to user preferences
  *
  * @todo for deprecation, use OwDatabaseAPI::getSQLForLanguageNames instead

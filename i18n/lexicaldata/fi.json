@@ -6,6 +6,7 @@
 			"Crt",
 			"Mobe",
 			"Nike",
+			"Pyscowicz",
 			"Silvonen",
 			"Str4nd",
 			"ZeiP"
@@ -192,6 +193,7 @@
 	"ow_suggest_clear": "Tyhjennä",
 	"ow_nstab_definedmeaning": "määritelty merkitys",
 	"ow_nstab_edit_copy": "muokkaa kopiota",
+	"action-addlanguage": "lisätä ja muuttaa kieliasetuksia",
 	"right-addlanguage": "Lisätä ja muuttaa kieliasetuksia",
 	"ow_shown_datasets": "Näytetyt tietuekokonaisuudet",
 	"prefs-ow-lang": "Kielet",

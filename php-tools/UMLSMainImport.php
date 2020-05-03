@@ -53,6 +53,5 @@ $umlsImport = importUMLSFromDatabase( "localhost", "umls2007aa", "root", "crosby
 // $umlsImport = importUMLSFromDatabase("localhost", "umls", "root", "nicheGod", array("GO", "SRC", "NCI", "HUGO"));
 // $umlsImport = importUMLSFromDatabase("localhost", "umls", "root", NULL, array("GO", "SRC", "NCI", "HUGO"));
 
-
 $endTime = time();
 echo "\n\nTime elapsed: " . durationToString( $endTime - $beginTime );

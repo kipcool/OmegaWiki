@@ -1,18 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
+			"Athena in Wonderland",
 			"Cainamarques",
 			"Dianakc",
+			"Eduardo Addad de Oliveira",
 			"Giro720",
 			"Hamilton Abreu",
 			"Jorge Morais",
 			"Luckas",
 			"Malafaya",
-			"Waldir",
-			"Vitorvicentevalente",
 			"MokaAkashiyaPT",
-			"Athena in Wonderland",
-			"Eduardo Addad de Oliveira"
+			"Vitorvicentevalente",
+			"Waldir",
+			"Waldyrious"
 		]
 	},
 	"wikidata-desc": "Adiciona uma base de dados tipo wiki para vários tipos de conteúdo",
@@ -216,7 +217,7 @@
 	"ow_needs_xlation_dest_lang": "Língua destino:",
 	"ow_needs_xlation_no_dest_lang": "Por favor, especifique uma língua destino.",
 	"ow_data_search": "Pesquisa de dados WikiLexicalData",
-	"ow_downloads": "Descargas WikiLexicalData",
+	"ow_downloads": "Descarregamentos de WikiLexicalData",
 	"ow_show": "Mostrar",
 	"ow_upload": "Enviar",
 	"ow_create": "Criar",
@@ -226,6 +227,7 @@
 	"ow_suggest_clear": "Limpar",
 	"ow_nstab_definedmeaning": "significado definido",
 	"ow_nstab_edit_copy": "editar cópia",
+	"action-addlanguage": "adicionar e modificar configurações de línguas",
 	"right-addlanguage": "Adicionar e modificar configurações de línguas",
 	"ow_shown_datasets": "Conjuntos de dados mostrados",
 	"prefs-ow-lang": "Línguas",

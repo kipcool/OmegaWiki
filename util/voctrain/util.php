@@ -1,6 +1,5 @@
 <?php
 
-
 /** useful generic utility functions
  * (will probably move some stuff from functions.php here, and tidy up in general)
  */

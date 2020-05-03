@@ -2,9 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"DCLXVI",
-			"Spiritia",
 			"Gazimagomedov",
-			"StanProg"
+			"Spiritia",
+			"StanProg",
+			"Ted Masters"
 		]
 	},
 	"wikidata-desc": "Добавяне на уики-подобна база данни за различни видове съдържание",
@@ -16,6 +17,7 @@
 	"langman_iso639-2": "ISO 639-2 код:",
 	"langman_field_optional": "(незадължително)",
 	"langman_addlang": "Добавяне на език",
+	"importlangnames_not_allowed": "Нямате разрешение за внасяне на имена на езици.",
 	"datasearch": "Търсене на данни",
 	"datasearch_language": "Език:",
 	"datasearch_ext_identifier": "Външен идентификатор",

@@ -16,7 +16,6 @@ require_once 'WikiDataGlobals.php';
 /**
  * Load and modify content in a OmegaWiki-enabled
  * namespace.
- *
  */
 class OmegaWiki extends DefaultWikidataApplication {
 	public function view() {
@@ -63,7 +62,7 @@ class OmegaWiki extends DefaultWikidataApplication {
 	}
 
 	public function edit() {
-		global $wgOut, $wgUser;
+		global $wgOut;
 
 		if ( !parent::edit() ) {
 			return false;

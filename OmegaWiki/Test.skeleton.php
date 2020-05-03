@@ -3,7 +3,6 @@
 # Empty skeleton for omegawiki test cases.
 # Replace occurrences of RecordHelperTest with the name of your own test case.
 
-
 define( 'MEDIAWIKI', true );
 
 if ( !defined( "PHPUnit_MAIN_METHOD" ) ) {
@@ -24,8 +23,6 @@ require_once "RecordHelper.php";
 
 class RecordHelperTest extends PHPUnit\Framework\TestCase {
 
-	var $testRecord;
-
 	public static function main() {
 		require_once "PHPUnit/TextUI/TestRunner.php";
 
@@ -33,7 +30,7 @@ class RecordHelperTest extends PHPUnit\Framework\TestCase {
 		$result = PHPUnit_TextUI_TestRunner::run( $suite );
 	}
 
-	function setUp() {
+	function setUp() : void {
 		global $wgCommandLineMode;
 		$wgCommandLineMode = true;
 		$dc = "uw";
@@ -42,11 +39,6 @@ class RecordHelperTest extends PHPUnit\Framework\TestCase {
 		$viewInformation->queryTransactionInformation = new QueryLatestTransactionInformation();
 
 		$model = new DefinedMeaningModel( $definedMeaningId, [ "viewinformation" => $viewInformation ] );
-		$testRecord = $model->getRecord();
-	}
-
-	function tearDown() {
-		$testRecord = null;
 	}
 
 }

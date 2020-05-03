@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"1917 Ekim Devrimi",
+			"Asmen",
 			"Erdemaslancan",
 			"Gorizon",
-			"Marmase",
-			"Mirzali",
 			"Kumkumuk",
-			"Asmen",
-			"1917 Ekim Devrimi"
+			"Marmase",
+			"Mirzali"
 		]
 	},
 	"languages": "İdarekarê zıwani",
@@ -58,8 +58,8 @@
 	"ow_ClassAttributeAttribute": "Xas seniney",
 	"ow_ClassAttributeLevel": "Sewiye",
 	"ow_ClassAttributeType": "Babet",
-	"ow_Collection": "Qoleksiyon",
-	"ow_Collection_colon": "Qoleksiyon:",
+	"ow_Collection": "Koleksiyon",
+	"ow_Collection_colon": "Koleksiyon:",
 	"ow_CollectionMember": "Ezay qoleksiyoni",
 	"ow_CollectionMembership": "Ezayina qoleksiyoni",
 	"ow_Definition": "Şınasiye",
@@ -103,5 +103,7 @@
 	"ow_suggest_next": "Bahdoyên",
 	"ow_suggest_clear": "Bestere",
 	"prefs-ow-lang": "Zıwani",
-	"ow-stat-overview-link": "Serqayt"
+	"ow-special-stat-collections": "{{PLURAL:$1|Koleksiyon|Koleksiyoni}}",
+	"ow-stat-overview-link": "Serqayt",
+	"ow-stat-collections": "{{PLURAL:$1|Koleksiyon|Koleksiyoni}}"
 }

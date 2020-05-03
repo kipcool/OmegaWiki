@@ -15,8 +15,8 @@ if ( !defined( 'MEDIAWIKI' ) ) {
  *
  * @author Erik Moeller <Eloquence@gmail.com>	(Possibly some remaining code)
  * @author Kim Bruning <kim@bruning.xs4all.nl>
- # @author Alan Smithee <Alan.Smithee@brown.paper.bag> (if code quality improves, may yet claim)
- * @license GPLv2 or later.
+ * @author Alan Smithee <Alan.Smithee@brown.paper.bag> (if code quality improves, may yet claim)
+ * @license GPL-2.0-or-later
  */
 require_once "WikiDataAPI.php";
 require_once "Utilities.php";
@@ -29,10 +29,11 @@ class SpecialCopy extends UnlistedSpecialPage {
 	}
 
 	function execute( $par ) {
-		global $wgOut, $wgRequest, $wgUser, $wdTermDBDataSet;
+		global $wgOut, $wgRequest;
 
 		# $wgOut->setPageTitle("Special:Copy");
-		if ( !$wgUser->isAllowed( 'wikidata-copy' ) ) {
+
+		if ( !$this->getUser()->isAllowed( 'wikidata-copy' ) ) {
 			$wgOut->addHTML( wfMessage( "ow_Permission_denied" )->text() );
 			return false;
 		}
@@ -80,15 +81,15 @@ class SpecialCopy extends UnlistedSpecialPage {
 
 		$abort = false; 	# check all input before aborting
 
-		if ( is_null( $dmid_dirty ) ) {
+		if ( $dmid_dirty === null ) {
 			$wgOut->addWikiMsg( "ow_please_provide_dmid" );
 			$abort = true;
 		}
-		if ( is_null( $dc1_dirty ) ) {
+		if ( $dc1_dirty === null ) {
 			$wgOut->addWikiMsg( "ow_please_provide_dc1" );
 			$abort = true;
 		}
-		if ( is_null( $dc2_dirty ) ) {
+		if ( $dc2_dirty === null ) {
 			$wgOut->addWikiMsg( "ow_please_provide_dc2" );
 			$abort = true;
 		}
@@ -131,7 +132,7 @@ class SpecialCopy extends UnlistedSpecialPage {
 	/* Using Copy.php; perform a copy of a defined meaning from one dataset to another,
 	   provided the user has permission to do so,*/
 	protected function _doCopy( $dmid_dirty, $dc1_dirty, $dc2_dirty ) {
-		global $wgOut, $wgUser, $wgCommunity_dc;
+		global $wgOut, $wgCommunity_dc;
 
 		# escape parameters
 		$dmid = mysql_real_escape_string( $dmid_dirty );
@@ -139,7 +140,7 @@ class SpecialCopy extends UnlistedSpecialPage {
 		$dc2 = mysql_real_escape_string( $dc2_dirty );
 
 		# check permission
-		if ( !( $wgUser->isAllowed( 'wikidata-copy' ) ) or $dc2 != $wgCommunity_dc ) {
+		if ( !( $this->getUser()->isAllowed( 'wikidata-copy' ) ) or $dc2 != $wgCommunity_dc ) {
 			$wgOut->addHTML( wfMessage( "ow_Permission_denied" )->text() );
 			return false; # we didn't perform the copy.
 		}

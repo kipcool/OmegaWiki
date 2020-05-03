@@ -1,9 +1,8 @@
 <?php
+
 /**
  * WikiLexicalData Job Class
- *
  */
-
 class WldJobs {
 
 	public function __construct() {

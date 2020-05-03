@@ -9,7 +9,6 @@
  * down the hierarchy of Editors instead of letting an Editor look up the hierarchy.
  * We possibly can extend/replace the IdStack to store context during rendering.
  */
-
 interface ContextFetcher {
 	public function fetch( $keyPath );
 }
@@ -18,7 +17,6 @@ interface ContextFetcher {
  * Class DefaultContextFetcher implements ContextFetcher by looking up a specified number of levels
  * in the keypath and returning the value for the specified attribute.
  */
-
 class DefaultContextFetcher implements ContextFetcher {
 	protected $levelsToLookUp;
 	protected $attribute;

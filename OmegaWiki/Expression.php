@@ -14,7 +14,7 @@ class Expression {
 		$this->id = $id;
 		$this->spelling = $spelling;
 		$this->languageId = $languageId;
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$this->dataset = wdGetDataSetContext();
 		} else {
 			$this->dataset = $dc;
@@ -52,9 +52,9 @@ class Expressions {
 
 	/** @brief creates a new Expression entry.
 	 *
-	 * @param spelling   req'd str
-	 * @param languageId req'd int
-	 * @param option     opt'l arr
+	 * @param string $spelling req'd
+	 * @param int $languageId req'd
+	 * @param array $options opt'l
 	 *
 	 * 	options:
 	 * 		updateId int Inserts a transaction id instead of the updated one.
@@ -95,12 +95,12 @@ class Expressions {
 
 	/** @ core getId function
 	 *
-	 * @param spelling   req'd str
-	 * @param languageId opt'l int
-	 * @param option     opt'l arr
+	 * @param string $spelling req'd
+	 * @param int|null $languageId opt'l
+	 * @param array $options opt'l
 	 *
-	 * @return str expression id for the languageId indicated.
-	 * @return arr The first expressionId/languageId [array( expessionId, languageId )] when languageId is skipped.
+	 * @return string expression id for the languageId indicated.
+	 * @return array The first expressionId/languageId [array( expessionId, languageId )] when languageId is skipped.
 	 * 	options:
 	 * 		dc           str The data set
 	 *
@@ -146,12 +146,12 @@ class Expressions {
 
 	/** @ core getMeaningIds function
 	 *
-	 * @param spelling   req'd str
-	 * @param languageId opt'l arr
-	 * @param option     opt'l arr
+	 * @param string $spelling req'd
+	 * @param array $languageIds opt'l
+	 * @param array $options opt'l
 	 *
-	 * @return arr list of defined meaning ids.
-	 * @return arr if empty, an empty array.
+	 * @return array list of defined meaning ids.
+	 * @return array if empty, an empty array.
 	 * 	options:
 	 * 		dc           str The data set
 	 *
@@ -221,7 +221,7 @@ class Expressions {
 	 * else returns null
 	 */
 	public static function getNumberOfExpressions( $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -258,7 +258,7 @@ class Expressions {
 	 * else returns null
 	 */
 	public static function getLanguageIdExpressions( $languageId, $options = [], $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );
@@ -307,7 +307,7 @@ class Expressions {
 	 * else returns null
 	 */
 	public static function getDefinedMeaningIdAndLanguageIdExpressions( $languageId, $definedMeaningId, $options = [], $dc = null ) {
-		if ( is_null( $dc ) ) {
+		if ( $dc === null ) {
 			$dc = wdGetDataSetContext();
 		}
 		$dbr = wfGetDB( DB_REPLICA );

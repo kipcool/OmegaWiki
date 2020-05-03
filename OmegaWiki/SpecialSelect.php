@@ -21,7 +21,7 @@ class SpecialSelect extends SpecialPage {
 	function execute( $par ) {
 		require_once "OmegaWikiDatabaseAPI.php";
 		require_once 'Transaction.php';
-		global $wgOut, $wgUser, $wgRequest;
+		global $wgOut, $wgRequest;
 
 		$wgOut->disable();
 

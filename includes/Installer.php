@@ -12,7 +12,7 @@ class ExtensionDatabaseUpdater {
 	}
 
 	/** @brief creates table and index
-	 * @return this->processed boolean whether any queries were processed.
+	 * @return bool whether any queries were processed.
 	 */
 	function addExtensionSCHEMA( $pattern, $prefix, $path, $freshInstall = false ) {
 		$this->pattern = $pattern;
@@ -23,7 +23,6 @@ class ExtensionDatabaseUpdater {
 
 		$this->dbw = wfGetDB( DB_MASTER );
 		$this->dbr = wfGetDB( DB_MASTER );
-		global $wgDBtype;
 
 		$this->setInternalParameters();
 
@@ -59,11 +58,11 @@ class ExtensionDatabaseUpdater {
 			if ( $sl < 0 ) {
 				continue;
 			}
-			if ( '-' == $line { 0 } && '-' == $line { 1 } ) {
+			if ( '-' == $line [ 0 ] && '-' == $line [ 1 ] ) {
 				continue;
 			}
 
-			if ( ';' == $line { $sl } && ( $sl < 2 || ';' != $line { $sl - 1 } ) ) {
+			if ( ';' == $line [ $sl ] && ( $sl < 2 || ';' != $line [ $sl - 1 ] ) ) {
 				$this->done = true;
 				$line = substr( $line, 0, $sl );
 			}
@@ -90,7 +89,7 @@ class ExtensionDatabaseUpdater {
 	/** @brief process a table
 	 */
 	protected function processTable() {
-		global $wgSitename, $wgDBtype;
+		global $wgSitename;
 		$this->replacePatternWithPrefix();
 		$this->extractTableName();
 		// process table if not exists
@@ -106,7 +105,7 @@ class ExtensionDatabaseUpdater {
 	/** @brief process an index
 	 */
 	protected function processIndex() {
-		global $wgSitename, $wgDBtype;
+		global $wgSitename;
 		$this->replacePatternWithPrefix();
 		$this->extractIndexTableName();
 		// process table if not exists
