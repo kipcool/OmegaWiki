@@ -548,7 +548,7 @@ class RecordSetTableEditor extends RecordSetEditor {
 	}
 
 	public function viewHeader( IdStack $idPath, Structure $visibleStructure ) {
-		$attribs = [ 'id' => $idPath->getId(), 'class' => 'wiki-data-table' ];
+		$attribs = [ 'id' => $idPath->getId(), 'class' => 'ow-table' ];
 		$result = Html::openElement( 'table', $attribs );
 
 		foreach ( getStructureAsTableHeaderRows( $visibleStructure, 0, $idPath ) as $headerRow ) {
@@ -606,7 +606,7 @@ class RecordSetTableEditor extends RecordSetEditor {
 	}
 
 	public function edit( IdStack $idPath, $value ) {
-		$tableattr = [ 'id' => $idPath->getId(), 'class' => 'wiki-data-table' ];
+		$tableattr = [ 'id' => $idPath->getId(), 'class' => 'ow-table-edit' ];
 		$result = Html::openElement( 'table', $tableattr );
 		$key = $value->getKey();
 		$rowAttributes = $this->getRowAttributesArray();
@@ -680,7 +680,7 @@ class RecordSetTableEditor extends RecordSetEditor {
 
 	public function add( IdStack $idPath ) {
 		if ( $this->isAddField ) {
-			$tableattr = [ 'id' => $idPath->getId(), 'class' => 'wiki-data-table' ];
+			$tableattr = [ 'id' => $idPath->getId(), 'class' => 'ow-table-add' ];
 			$result = Html::openElement( 'table', $tableattr );
 			$headerRows = getStructureAsTableHeaderRows( $this->getAddStructure(), 0, $idPath );
 
@@ -698,7 +698,7 @@ class RecordSetTableEditor extends RecordSetEditor {
 		return "";
 	}
 
-	function getStructureAsAddCells( IdStack $idPath, Editor $editor, &$startColumn = 0 ) {
+	function getStructureAsAddCells( IdStack $idPath, Editor $editor ) {
 		$result = '';
 
 		foreach ( $editor->getEditors() as $childEditor ) {
@@ -707,15 +707,14 @@ class RecordSetTableEditor extends RecordSetEditor {
 			$idPath->pushAttribute( $attribute );
 
 			if ( $childEditor instanceof RecordTableCellEditor ) {
-				$result .= $this->getStructureAsAddCells( $idPath, $childEditor, $startColumn );
+				$result .= $this->getStructureAsAddCells( $idPath, $childEditor );
 			} else {
 				if ( $childEditor->showEditField( $idPath ) ) {
-					$tdclass = getHTMLClassForType( $type, $attribute ) . ' column-' . parityClass( $startColumn );
+					$tdclass = getHTMLClassForType( $type, $attribute );
 					$result .= Html::openElement( 'td', [ 'class' => $tdclass ] );
 					$result .= $childEditor->add( $idPath );
 					$result .= Html::closeElement( 'td' );
 				}
-				$startColumn++;
 			}
 
 			$idPath->popAttribute();

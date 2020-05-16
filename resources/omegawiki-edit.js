@@ -25,6 +25,11 @@ jQuery(document).ready(function( $ ) {
 	$("body").on('click', "td.addemptyrow", function(event) {
 		addEmptyRow( this.parentNode.id );
 	});
+
+	$("body").on('click', ".remove-checkbox", function(event) {
+		$(this).closest("tr").toggleClass('to-be-removed');
+	});
+
 });
 
 // add a new row for translation or definition

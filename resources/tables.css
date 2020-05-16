@@ -72,10 +72,10 @@
 
 
 /****
- * Wikidata tables
+ * OmegaWiki tables
  */
 
-.wiki-data-table td, .wiki-data-table th {
+.ow-table td, .ow-table th {
 	padding-top: 0px;
 	padding-bottom: 0px;
 	padding-left: 2px;
@@ -84,24 +84,75 @@
 	border: none;
 }
 
-.wiki-data-table th {
+.ow-table th {
 	background-color: #EEEEEE;
 	text-align: left;
 	vertical-align: bottom;
 	white-space: nowrap;
 }
 
-.wiki-data-table th.sortable {
+.ow-table th.sortable {
 	cursor: pointer;
 }
 
-.wiki-data-table td.column-odd {
-	background-color: #F6F6F6;
+.ow-table td {
+	vertical-align: top;
 }
 
-.wiki-data-table td.column-even {
+.ow-table td.text {
+	padding-bottom: 4px;
+}
+
+/*
+.ow-table td .ow-table td textarea, li .ow-table td textarea {
+	width: auto;
+}
+*/
+
+/* only direct children, otherwise it affects ow-table-edit as well */
+.ow-table > tbody > tr > td.language,
+.ow-table > tbody > tr > td.objAtt
+{
+	background-color: #F9F9F9;
+}
+
+.ow-table > tbody > tr > td.spelling,
+.ow-table > tbody > tr > td.text,
+{
 	background-color: #FFFFFF;
 }
+
+.ow-table-edit tr.edit {
+        background-color: #FFFFFF;
+}
+
+.ow-table-edit td {
+        background-color: #FFFFFF;
+}
+
+.ow-table-edit td.remove {
+	text-align: center;
+	background-color: #EEEEEE;
+}
+
+.ow-table-edit tr.to-be-removed td:nth-child(even), .ow-table-edit tr.to-be-removed td.remove {
+	background: #FFD8C0;
+}
+
+.ow-table-edit tr.to-be-removed td:nth-child(odd) {
+	background: #FFE8D0;
+}
+
+.ow-table-edit tr.to-be-removed th {
+	background: #FFD0B2;
+}
+
+.ow-table-edit th.remove, .ow-table-edit th.input-rows {
+	font-weight: normal;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
 .boolean {
 	text-align: center;
 }
@@ -112,41 +163,6 @@
 
 .language, .text, .short-text {
 	text-align: left;
-}
-
-.wiki-data-table td.text {
-	padding-bottom: 4px;
-}
-
-.wiki-data-table td {
-	vertical-align: top;
-}
-
-.wiki-data-table td.remove {
-	text-align: center;
-	background-color: #EEEEEE;
-}
-
-.wiki-data-table tr.to-be-removed td.column-odd, .wiki-data-table tr.to-be-removed td.remove {
-	background: #FFD8C0;
-}
-
-.wiki-data-table tr.to-be-removed td.column-even {
-	background: #FFE8D0;
-}
-
-.wiki-data-table tr.to-be-removed th {
-	background: #FFD0B2;
-}
-
-.wiki-data-table th.remove, .wiki-data-table th.input-rows {
-	font-weight: normal;
-	padding-left: 4px;
-	padding-right: 4px;
-}
-
-.wiki-data-table td .wiki-data-table td textarea, li .wiki-data-table td textarea {
-	width: auto;
 }
 
 .wld-remove-header {
@@ -212,7 +228,6 @@
 	margin-top:10px;
 	padding:5px;
 	border-radius: 100px;
-	-moz-border-radius: 100px;
 }
 
 /******
@@ -227,7 +242,6 @@
 /* 	top and bottom are 5px, left and right are 10px */
 	padding:5px 10px;
 	border-radius: 100px;
-	-moz-border-radius: 100px;
 }
 
 /******
@@ -448,8 +462,7 @@ div.owstatmainheader {
 }
 
 div.owstatbar {
-	background-image: -webkit-linear-gradient(blue, cyan, blue);
-	background-image: -moz-linear-gradient(blue, cyan, blue);
+	background-image: linear-gradient(blue, cyan, blue);
 	float:left;
 	height: 15px;
 	padding-right:5px;

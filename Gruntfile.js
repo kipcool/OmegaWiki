@@ -16,8 +16,7 @@ module.exports = function ( grunt ) {
 			all: [
 				'*.js',
 				'!node_modules/**',
-				'!vendor/**',
-				'!resources/wforms.js' // # upstream lib
+				'!vendor/**'
 			]
 		},
 		jsonlint: {

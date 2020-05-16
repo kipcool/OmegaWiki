@@ -2,10 +2,6 @@ jQuery(document).ready(function( $ ) {
 
 	var suggestionTimeOut = null;
 
-	$(".remove-checkbox").click(function(event) {
-		$(this).parent().parent().toggleClass('to-be-removed');
-	});
-
 	// some delegated handlers for elements added dynamically
 	$("body").on('click', ".suggest-next", function(event) {
 		var suggestPrefix, suggestLink, suggestOffset;
@@ -278,13 +274,6 @@ jQuery(document).ready(function( $ ) {
 		*/
 
 	$(document).ajaxComplete(function() {
-		// highlight the background when the cursor is over it
-		$(".suggestion-row").mouseover(function() {
-			$(this).addClass('active');
-		}).mouseout(function() {
-			$(this).removeClass('active');
-		});
-
 		$(".suggestion-row").click(function() {
 			var suggestPrefix, suggestlink, idColumnsField, displayLabelField, displayLabelColumnIndices, labels, i, columnValue, idColumns, values, ids;
 

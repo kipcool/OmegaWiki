@@ -13,7 +13,7 @@
 	background-position: center right;
 }
 
-.wiki-data-table td .suggest-link,
+.ow-table-edit td .suggest-link,
 .option-panel td .suggest-link {
 	display: table-cell;
 	zoom: 1;
@@ -108,10 +108,6 @@ td .suggest-link:visited {
 	margin: 0px;
 	cursor: pointer;
 }
-.suggestion-row.active td.column-even,
-.suggestion-row.active td.column-odd {
-	background-color: #CECCF7;
-}
 
 .suggestion-row td {
 	padding-top: 0px;
@@ -121,5 +117,9 @@ td .suggest-link:visited {
 	margin-top: 0px;
 	margin-bottom: 0px;
 	white-space: nowrap;
+}
+
+.suggestion-row td:hover {
+	background-color: #CECCF7;
 }
 

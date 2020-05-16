@@ -4,14 +4,6 @@ require_once "Attribute.php";
 require_once "Record.php";
 require_once "RecordSet.php";
 
-function parityClass( $value ) {
-	if ( $value % 2 == 0 ) {
-		return "even";
-	} else {
-		return "odd";
-	}
-}
-
 /* Functions to create a hierarchical table header
  * using rowspan and colspan for <th> elements
  */
@@ -94,7 +86,7 @@ function getHTMLClassForType( $type, Attribute $attribute ) {
 	}
 }
 
-function getRecordAsTableCells( IdStack $idPath, Editor $editor, Structure $visibleStructure, Record $record, &$startColumn = 0 ) {
+function getRecordAsTableCells( IdStack $idPath, Editor $editor, Structure $visibleStructure, Record $record ) {
 	$result = '';
 	$childEditorMap = $editor->getAttributeEditorMap();
 
@@ -109,9 +101,9 @@ function getRecordAsTableCells( IdStack $idPath, Editor $editor, Structure $visi
 			$attributeId = $idPath->getId();
 
 			if ( $childEditor instanceof RecordTableCellEditor ) {
-				$result .= getRecordAsTableCells( $idPath, $childEditor, $visibleAttribute->type, $value, $startColumn );
+				$result .= getRecordAsTableCells( $idPath, $childEditor, $visibleAttribute->type, $value );
 			} else {
-				$tdclass = getHTMLClassForType( $type, $attribute ) . ' column-' . parityClass( $startColumn );
+				$tdclass = getHTMLClassForType( $type, $attribute );
 				$tdattribs = [ "class" => $tdclass ];
 				$displayValue = $childEditor->showsData( $value ) ? $childEditor->view( $idPath, $value ) : "";
 
@@ -119,7 +111,6 @@ function getRecordAsTableCells( IdStack $idPath, Editor $editor, Structure $visi
 					$tdattribs["langid"] = $value;
 				}
 				$result .= Html::rawElement( 'td', $tdattribs, $displayValue );
-				$startColumn++;
 			}
 
 			$idPath->popAttribute();
@@ -130,7 +121,7 @@ function getRecordAsTableCells( IdStack $idPath, Editor $editor, Structure $visi
 	return $result;
 }
 
-function getRecordAsEditTableCells( IdStack $idPath, Editor $editor, Structure $visibleStructure, Record $record, &$startColumn = 0 ) {
+function getRecordAsEditTableCells( IdStack $idPath, Editor $editor, Structure $visibleStructure, Record $record ) {
 	$result = '';
 	$childEditorMap = $editor->getAttributeEditorMap();
 
@@ -144,9 +135,9 @@ function getRecordAsEditTableCells( IdStack $idPath, Editor $editor, Structure $
 			$idPath->pushAttribute( $attribute );
 
 			if ( $childEditor instanceof RecordTableCellEditor ) {
-				$result .= getRecordAsEditTableCells( $idPath, $childEditor, $visibleAttribute->type, $value, $startColumn );
+				$result .= getRecordAsEditTableCells( $idPath, $childEditor, $visibleAttribute->type, $value );
 			} else {
-				$tdclass = getHTMLClassForType( $type, $attribute ) . ' column-' . parityClass( $startColumn );
+				$tdclass = getHTMLClassForType( $type, $attribute ) . ' edit';
 				$tdattribs = [ "class" => $tdclass ];
 				$displayValue = $childEditor->showEditField( $idPath ) ? $childEditor->edit( $idPath, $value ) : "";
 
@@ -154,7 +145,6 @@ function getRecordAsEditTableCells( IdStack $idPath, Editor $editor, Structure $
 					$tdattribs["langid"] = $value;
 				}
 				$result .= Html::rawElement( 'td', $tdattribs, $displayValue );
-				$startColumn++;
 			}
 
 			$idPath->popAttribute();
