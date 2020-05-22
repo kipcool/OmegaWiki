@@ -23,7 +23,8 @@ $specialPageAliases['en'] = [
 	// unlisted:
 	'Suggest' => [ 'Suggest' ],
 	'Copy' => [ 'Copy' ],
-	'PopupEditor' => [ 'PopsUpEditor' ],
+	'PopupEditor' => [ 'PopupEditor' ],
 	'Transaction' => [ 'Transaction' ],
 	'Select' => [ 'Select' ],
 ];
+

@@ -4,8 +4,6 @@
 // where Wld stands for "WikiLexicalData".
 // TODO: rename the other variables
 
-define( 'NS_EXPRESSION', 16 );
-define( 'NS_DEFINEDMEANING', 24 );
 define( 'WLD_ENGLISH_LANG_ID', 85 );
 define( 'WLD_ENGLISH_LANG_WMKEY', "en" );
 
@@ -82,18 +80,6 @@ $wdDefinedMeaningAttributesOrder = [
 	WLD_COLLECTION_MEMBERSHIP,
 	WLD_INCOMING_RELATIONS
 ];
-
-// Page titles
-$wgWldUseExpressionPageTitlePrefix = true;	# malafaya: Use the expression prefix "Multiple meanings:" from message ow_Multiple_meanings
-$wgWldShowClassicPageTitles = false;
-$wgWldExpressionPageTitlePrefix = 'Multiple meanings';
-/** @note both wgWldUseExpressionPageTitlePrefix and wgWldExpressionPageTitles
- *	seems to be unused based on ...
- *		git grep -e wgWldUseExpressionPageTitlePrefix
- *		and
- *		git grep -e wgWldExpressionPageTitlePrefix
- *	If not going to be used. Should ow_Multiple_meanings @ i18n/lexicaldata/en.json be removed also? ~he
- */
 
 // Search page
 $wgWldSearchExternalIDDefault = false;

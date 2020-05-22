@@ -1,0 +1,155 @@
+{
+	"name": "WikiLexicalData",
+	"version": "1",
+	"url": "https://www.mediawiki.org/wiki/Extension:WikiLexicalData",
+	"author": [
+		"Erik Möller",
+		"Kim Bruning",
+		"Maarten van Hoof",
+		"André Malafaya Baptista",
+		"Kipcool",
+		"庄向荣",
+		"Purodha Blissenbach"
+	],
+	"descriptionmsg": "wikidata-desc",
+	"requires": {
+		"MediaWiki": ">= 1.31"
+	},
+	"ExtensionMessagesFiles": {
+		"WikiLexicalDataAlias": "i18n/WikiLexicalData.i18n.alias.php"
+	},
+	"MessagesDirs": {
+		"WikiLexicalData": [
+			"i18n/lexicaldata"
+		]
+	},
+	"AutoloadClasses": {
+		"OwDatabaseAPI": "OmegaWiki/OmegaWikiDatabaseAPI.php",
+		"Syntrans": "OmegaWiki/OmegaWikiDatabaseAPI.php",
+		"OmegaWikiHooks": "OmegaWiki.hooks.php",
+		"WikidataArticle": "includes/WikidataArticle.php",
+		"WikidataEditPage": "includes/WikidataEditPage.php",
+		"WikidataPageHistory": "includes/WikidataPageHistory.php",
+		"OmegaWiki": "OmegaWiki/OmegaWiki.php",
+		"OmegaWikiTags": "includes/OmegaWikiTags.php",
+		"DataSet": "OmegaWiki/Wikidata.php",
+		"DefaultWikidataApplication": "OmegaWiki/Wikidata.php",
+		"DefinedMeaning": "OmegaWiki/DefinedMeaning.php",
+		"DefinedMeanings": "OmegaWiki/DefinedMeaning.php",
+		"DefinedMeaningModel": "OmegaWiki/DefinedMeaningModel.php",
+		"Search": "OmegaWiki/Search.php",
+		
+		"SpecialCopy": "OmegaWiki/SpecialCopy.php",
+		"SpecialSelect": "OmegaWiki/SpecialSelect.php",
+		"SpecialSuggest": "OmegaWiki/SpecialSuggest.php",
+		"SpecialPopupEditor": "OmegaWiki/SpecialPopupEditor.php",
+		"SpecialAddCollection": "OmegaWiki/SpecialAddCollection.php",
+		"SpecialDatasearch": "includes/specials/SpecialDatasearch.php",
+		"SpecialImportLangNames": "OmegaWiki/SpecialImportLangNames.php",
+		"SpecialNeedsTranslation": "OmegaWiki/SpecialNeedsTranslation.php",
+		"SpecialOWStatistics": "includes/specials/SpecialOWStatistics.php",
+		"SpecialOWDownloads": "includes/specials/SpecialOWDownloads.php",
+		"SpecialExportTSV": "includes/specials/SpecialExportTSV.php",
+		"SpecialImportTSV": "includes/specials/SpecialImportTSV.php",
+		
+		"CreateExpressionListJob": "includes/jobs/OWExpressionListJob.php",
+		"CreateDefinedExpressionListJob": "includes/jobs/OWDefinedExpressionListJob.php",
+		"CreateOwdListJob": "includes/jobs/OWOwdListJob.php"	
+	},
+	"AvailableRights": [
+		"editwikidata-uw",
+		"deletewikidata-uw",
+		"wikidata-copy",
+		"languagenames",
+		"addcollection",
+		"editClassAttributes",
+		"exporttsv",
+		"importtsv"
+	],
+	"GroupPermissions": {
+		"*": {
+			"editClassAttributes": false
+		},
+		"wikidata-omega": {
+			"editwikidata-uw": true,
+			"deletewikidata-uw": true,
+			"wikidata-copy": true
+		},
+		"wikidata-copy": {
+			"wikidata-copy": true
+		},
+		"bureaucrat": {
+			"languagenames": true,
+			"addcollection": true,
+			"editClassAttributes": true,
+			"exporttsv": true,
+			"importtsv": true
+		},
+		"TSV-import-export": {
+			"exporttsv": true,
+			"importtsv": true
+		}			
+	},
+	"Hooks": {
+		"BeforePageDisplay": "OmegaWikiHooks::onBeforePageDisplay",
+		"GetPreferences": "OmegaWikiHooks::onGetPreferences",
+		"ArticleFromTitle": "OmegaWikiHooks::onArticleFromTitle",
+		"CustomEditor": "OmegaWikiHooks::onCustomEditor",
+		"MediaWikiPerformAction": "OmegaWikiHooks::onMediaWikiPerformAction",
+		"NamespaceIsMovable": "OmegaWikiHooks::onNamespaceIsMovable",
+		"ParserFirstCallInit": "OmegaWikiTags::onParserFirstCallInit",
+		"SpecialSearchNogomatch": "OmegaWikiHooks::onNoGoMatchHook",
+		"SearchGetNearMatchBefore": "OmegaWikiHooks::onGoClicked",
+		"PageContentLanguage": "OmegaWikiHooks::onPageContentLanguage",
+		"SkinTemplateNavigation": "OmegaWikiHooks::onSkinTemplateNavigation",
+		"LoadExtensionSchemaUpdates": "OmegaWikiHooks::loadSchema",
+		"SpecialStatsAddExtra": "OmegaWikiHooks::onSpecialStatsAddExtra",
+		"InternalParseBeforeSanitize": "OmegaWikiHooks::onInternalParseBeforeLinks",
+		"CanonicalNamespaces": "OmegaWikiHooks::onCanonicalNamespaces"
+	},
+	"JobClasses": {
+		"CreateExpressionList": "CreateExpressionListJob",
+		"CreateDefinedExpressionList": "CreateDefinedExpressionListJob",
+		"CreateOwdList": "CreateOwdListJob"
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "WikiLexicalData/resources"
+	},
+	"ResourceModules": {
+		"ext.Wikidata.css": {
+			"styles": [
+				"suggest.css", 
+				"tables.css"
+			],
+			"position": "top"
+		},
+		"ext.Wikidata.ajax": {
+			"scripts": "omegawiki-ajax.js"
+		},
+		"ext.Wikidata.edit": {
+			"scripts": "omegawiki-edit.js"
+		},
+		"ext.Wikidata.suggest": {
+			"scripts": "suggest.js",
+			"messages": ["ow_suggest_clear", "ow_suggest_previous", "ow_suggest_next" ]
+		}
+	},
+	"SpecialPages": {
+		"Copy": "SpecialCopy",
+		"Select": "SpecialSelect",
+		"Suggest": "SpecialSuggest",
+		"PopupEditor": "SpecialPopupEditor",
+		"AddCollection": "SpecialAddCollection",
+		"ow_data_search": "SpecialDatasearch",
+		"ImportLangNames": "SpecialImportLangNames",
+		"NeedsTranslation": "SpecialNeedsTranslation",
+		"ow_statistics": "SpecialOWStatistics",
+		"ow_downloads": "SpecialOWDownloads",
+		"ExportTSV": "SpecialExportTSV",
+		"ImportTSV": "SpecialImportTSV"
+	},
+	"config": {
+	},
+	"manifest_version": 2
+}

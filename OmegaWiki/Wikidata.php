@@ -16,7 +16,7 @@ class DefaultWikidataApplication {
 	protected $showCommunityContribution;
 
 	// The following member variables control some application specific preferences
-	protected $showClassicPageTitles = true;	// Show classic page titles instead of prettier page titles
+	protected $showClassicPageTitles = false;	// Show classic page titles instead of prettier page titles
 
 	protected $propertyToColumnFilters = [];
 	protected $viewInformation;
@@ -25,13 +25,10 @@ class DefaultWikidataApplication {
 	protected $showDataSetPanel = false;
 
 	public function __construct( $title ) {
-		global $wgWldShowClassicPageTitles, $wgPropertyToColumnFilters;
+		global $wgPropertyToColumnFilters;
 
 		$this->title = $title;
-
-		if ( isset( $wgWldShowClassicPageTitles ) ) {
-			$this->showClassicPageTitles = $wgWldShowClassicPageTitles;
-		}
+		$this->showClassicPageTitles = false;
 		if ( isset( $wgPropertyToColumnFilters ) ) {
 			$this->propertyToColumnFilters = $wgPropertyToColumnFilters;
 		}
